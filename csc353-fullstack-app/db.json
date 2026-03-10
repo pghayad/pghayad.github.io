@@ -1,0 +1,25 @@
+{
+  "todos": [
+    {
+      "id": "1773167873539",
+      "task": "Go to Class",
+      "completed": false
+    },
+    {
+      "id": "1773167877114",
+      "task": "Clean Room",
+      "completed": false
+    },
+    {
+      "task": "Cook Food",
+      "completed": false,
+      "id": "1773167880451"
+    },
+    {
+      "id": "1773167892647",
+      "task": "Go to Store",
+      "completed": false
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
