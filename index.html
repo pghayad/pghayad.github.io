@@ -1,223 +1,460 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Portfolio of Paul Ghayad</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <nav id="hamnav" class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
-  <label for="hamburger">&#9776;</label>
-  <input type="checkbox" id="hamburger"/>
-  <div id="hamitems">
-    <a href="#">Home</a>
-    <a href="#aboutme">About Me</a>
-    <a href="#myinterests">My Interests</a>
-    <a href="#current">Past CData Work</a>
-    <a href="#projects">Projects</a>
-    <a href="#presentations">Presentations</a>
-    <a href="#contactme">Contact Me</a>
-  </div>
-</nav>
-<div class="jumbotron">
-<div class="card">
-  <div class="card-header">
-    Professor of Computer Science at LaSalle University
-  </div>
-  <div class="card-body">
-    <h2 class="card-title">Paul Ghayad</h2>
-    <p class="card-text">Try free coding lessons with me!</p>
-    <p class="card-text">
-      Offering 1-on-1 Software Engineering lessons this Summer 2026 designed to get you a job in Tech!
-      Work with me for 4-6 months, learning how to code and how to spruce up your resume.
-    Before you know it, you'll have you a nice full-time Software Engineer position!
-    </p>
-  </div>
-</div>
-  
-  <img width="400px" height="400px" id="mainImg" src="/img/PaulGhayad-headshot.jpg">
-
-<div class="jumbotron">
-  <div class="row row-cols-1 row-cols-md-3 g-4">
-  <div class="col">
-    <div class="card h-100">
-      <div class="card-body">
-        <h5 class="card-title">Basic Membership</h5>
-        <p class="card-text">
-          <ul>
-            <li>Access to online coding resources 24/7</li>
-            <li>3 1.5 hour one-on-one lectures every week for 4 months</li>
-            <li>Career services to ensure that you land a Tech role within 3 months of completing the course</li>
-          </ul>
-        </p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted">$2000</small>
-      </div>
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta
+      name="author"
+      content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
+    />
+    <meta name="generator" content="Astro v5.13.2" />
+    <title>Heroes · Bootstrap v5.3</title>
+    <link
+      rel="canonical"
+      href="https://getbootstrap.com/docs/5.3/examples/heroes/"
+    />
+    <script src="../assets/js/color-modes.js"></script>
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <meta name="theme-color" content="#712cf9" />
+    <link href="heroes.css" rel="stylesheet" />
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      .b-example-divider {
+        width: 100%;
+        height: 3rem;
+        background-color: #0000001a;
+        border: solid rgba(0, 0, 0, 0.15);
+        border-width: 1px 0;
+        box-shadow:
+          inset 0 0.5em 1.5em #0000001a,
+          inset 0 0.125em 0.5em #00000026;
+      }
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+      .bi {
+        vertical-align: -0.125em;
+        fill: currentColor;
+      }
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+      .btn-bd-primary {
+        --bd-violet-bg: #712cf9;
+        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+        --bs-btn-font-weight: 600;
+        --bs-btn-color: var(--bs-white);
+        --bs-btn-bg: var(--bd-violet-bg);
+        --bs-btn-border-color: var(--bd-violet-bg);
+        --bs-btn-hover-color: var(--bs-white);
+        --bs-btn-hover-bg: #6528e0;
+        --bs-btn-hover-border-color: #6528e0;
+        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+        --bs-btn-active-color: var(--bs-btn-hover-color);
+        --bs-btn-active-bg: #5a23c8;
+        --bs-btn-active-border-color: #5a23c8;
+      }
+      .bd-mode-toggle {
+        z-index: 1500;
+      }
+      .bd-mode-toggle .bi {
+        width: 1em;
+        height: 1em;
+      }
+      .bd-mode-toggle .dropdown-menu .active .bi {
+        display: block !important;
+      }
+    </style>
+  </head>
+  <body>
+    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+      <symbol id="check2" viewBox="0 0 16 16">
+        <path
+          d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"
+        ></path>
+      </symbol>
+      <symbol id="circle-half" viewBox="0 0 16 16">
+        <path
+          d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
+        ></path>
+      </symbol>
+      <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+        <path
+          d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"
+        ></path>
+        <path
+          d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"
+        ></path>
+      </symbol>
+      <symbol id="sun-fill" viewBox="0 0 16 16">
+        <path
+          d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"
+        ></path>
+      </symbol>
+    </svg>
+    <div
+      class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle"
+    >
+      <button
+        class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
+        id="bd-theme"
+        type="button"
+        aria-expanded="false"
+        data-bs-toggle="dropdown"
+        aria-label="Toggle theme (auto)"
+      >
+        <svg class="bi my-1 theme-icon-active" aria-hidden="true">
+          <use href="#circle-half"></use>
+        </svg>
+        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+      </button>
+      <ul
+        class="dropdown-menu dropdown-menu-end shadow"
+        aria-labelledby="bd-theme-text"
+      >
+        <li>
+          <button
+            type="button"
+            class="dropdown-item d-flex align-items-center"
+            data-bs-theme-value="light"
+            aria-pressed="false"
+          >
+            <svg class="bi me-2 opacity-50" aria-hidden="true">
+              <use href="#sun-fill"></use>
+            </svg>
+            Light
+            <svg class="bi ms-auto d-none" aria-hidden="true">
+              <use href="#check2"></use>
+            </svg>
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            class="dropdown-item d-flex align-items-center"
+            data-bs-theme-value="dark"
+            aria-pressed="false"
+          >
+            <svg class="bi me-2 opacity-50" aria-hidden="true">
+              <use href="#moon-stars-fill"></use>
+            </svg>
+            Dark
+            <svg class="bi ms-auto d-none" aria-hidden="true">
+              <use href="#check2"></use>
+            </svg>
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            class="dropdown-item d-flex align-items-center active"
+            data-bs-theme-value="auto"
+            aria-pressed="true"
+          >
+            <svg class="bi me-2 opacity-50" aria-hidden="true">
+              <use href="#circle-half"></use>
+            </svg>
+            Auto
+            <svg class="bi ms-auto d-none" aria-hidden="true">
+              <use href="#check2"></use>
+            </svg>
+          </button>
+        </li>
+      </ul>
     </div>
-  </div>
-  <div class="col">
-    <div class="card h-100">
-      <div class="card-body">
-          <h5 class="card-title">Premium Membership</h5>
-        <p class="card-text">
-          <ul>
-            <li>Access to online coding resources 24/7</li>
-            <li>4 1.5 hour one-on-one lectures every week for 5 months</li>
-            <li>Career services to ensure that you land a Tech role within 2 months of completing the course</li>
-          </ul>
-        </p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted">$2500</small>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card h-100">
-      <div class="card-body">
-          <h5 class="card-title">Elite Membership</h5>
-        <p class="card-text">
-          <ul>
-            <li>Access to online coding resources 24/7</li>
-            <li>5 1.5 hour one-on-one lectures every week for 6 months</li>
-            <li>Career services to ensure that you land a Tech role within 2 months of completing the course</li>
-          </ul>
-        </p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted">$3000</small>
-      </div>
-    </div>
-  </div>
-</div>
-</div>  
-<div id="aboutme" class="container">
-  <div class="row">
-    <div style="background-color: lightblue;" class="col-sm-12 col-lg-12">
-      <h3 class="text-center">About Me</h3>
-      
-      <p>Hello, my name is Paul. Over the past 5 years, I have dedicated myself to the instruction of
-        Computer Science and Software Engineering at the highest-level.  I take pride in the experiences
-        that my students share with me, how happy they are to be introduced the magic of coding!
-        </p>
-      <p>Some of the courses I have taught include: Web Application Development (graduate-level), 
-        Design and Analysis of Algorithms, Computer Architecture, Introduction to Java, as well as several introductory courses
-        in React, Node, JavaScript, Java, Spring Boot, Bootstrap, HTML, Python, SQL, C++, C, and the like.
-      </p>
-      <p>
-        Although my strengths mostly lie in front-end development, I
-        possess the skills to work on full-stack web application projects.
-        As you peruse my portfolio, I just want to thank you for visiting. Please feel free to 
-        get in touch via any of the options listed at the bottom of this page.  Happy Coding!
-      </p>
-    </div>
-    <br>
+    <main>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Paul Ghayad</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#home">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#about">About</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Projects
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#projects">A</a></li>
+                        <li><a class="dropdown-item" href="#contact">B</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">C</a></li>
+                      </ul>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                    </li>
+                  </ul>
+                  <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                  </form>
+                </div>
+              </div>
+            </nav>
+      <h1 class="visually-hidden">Heroes examples</h1>
+      <div class="px-4 py-5 my-5 text-center">
+        <img
+          class="d-block mx-auto mb-4"
+          src="../pghayad.github.io/img/headshot_june2026.png"
+          alt=""
+          width="200"
+          height="200"
+        />
+        
+        <h1 class="display-5 fw-bold text-body-emphasis">Paul Ghayad</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-4">
+            I am a Professor of Computer Science in the Philadelphia area who is always 
+            looking to take on new, budding Software Engineers.
 
-  </div>
-</div>
-<hr>
-
-<div id="myinterests" class="text-center">
-  <div style="background-color: pink" class="container">
-    <h3 class="text-center">My Interests</h3><br>
-     <div class="hero myInterests">
-          
-            <img src="/img/tennis.jpg" alt="tennis"/>
-      </div>
-      <br><br>
-      <div class="thumbnails myInterests">
-            <a class="thumbnail"><img src="/img/tennis.jpg" alt="tennis"/></a>
-            <a class="thumbnail"><img src="/img/chess.jpg" alt="chess"/></a>
-            <a class="thumbnail"><img src="/img/cat.jpg" alt="cat"/></a>
-      </div>
-      <p id="description">
-      Tennis is one of my all-time favorite sports.  I am actually a USPTA 
-      Certified Tennis Instructor. I play about once or twice per week.
-      When the weather is nice, you can find me outside on a court. Tennis is so great
-      because it is for people of all ages.
-    </p>
-  </div>
-</div>
-<hr>
-
-<div id="projects" class="container text-center">
-    <div class="row">
-      <div style="background-color: lightgreen;" class="col-sm-12 col-lg-12">
-        <a id="projects"></a>
-        <h3 class="text-center">Side Projects | Games</h3>
-        <ul>
-          <div  class="panel panel-warning">
-            <div class="panel-body"><a target="_blank" href="/weatherapp/index.html">Weather App</a></div>
-            <div class="panel-body"><a target="_blank" href="/cocktailapp/index.html">Cocktail App</a></div>
-            <div class="panel-body"><a target="_blank" href="/videopoker/index.html">Video Poker</a></div>
-            <div class="panel-body"><a target="_blank" href="/crazyeights/index.html">Crazy Eights</a></div>
-            <div class="panel-body"><a target="_blank" href="/hangman/index.html">Hangman</a></div>
-            <div class="panel-body"><a target="_blank" href="/memorygame/index.html">The Memory Game</a></div>
-            <div class="panel-body"><a target="_blank" href="/war/index.html">The Game Of War</a></div>
-            <div class="panel-body"><a target="_blank" href="/rockpaperscissors/index.html">Rock Paper Scissors</a></div>
-            <div class="panel-body"><a target="_blank" href="/tictactoe/index.html">Tic Tac Toe</a></div>
-            <div class="panel-body"><a target="_blank" href="/csc353-fullstack-app/index.html">CSC353 App</a></div>
-            </div>
-          </ul>
-      </div>
-      <br>
-    </div>
-  </div>
-  <hr>
-  <div id="presentations" style="background-color: lightyellow;" class="container text-center">
- <a id="presentations"></a>
-      <h3>Video Tutorials / Presentations</h3>
-  
-        <div class="panel panel-default">
-          <div class="panel-body"><a target="_blank" href="https://www.youtube.com/watch?v=ACaouRTyJMI">Flatiron School - Coding For Beginners</a></div>
-          <div class="panel-body"><a target="_blank" href="https://www.youtube.com/watch?v=FvbLuj_Isf0">ReactJS Exercise Review</a></div>
-          
-          <div class="panel-body"><a target="_blank" href="https://www.youtube.com/watch?v=dIxXkqUt0nI">Beginning Stages Of A React App</a></div>
-
-          <div class="panel-body"><a target="_blank" href="https://youtu.be/ruZzieDZeu8">Vanilla JavaScript Web App w/ CRUD</a></div>
-
-          <div class="panel-body"><a target="_blank" href="https://youtu.be/CYX6egvjcmk">Python Lists</a></div>
-
-          <div class="panel-body"><a target="_blank" href="https://www.youtube.com/watch?v=juc7lqfepVk&t=341s&pp=0gcJCQQLAYcqIYzv">Intro to Relational Databases, Part I</a></div>
-          
-          <div class="panel-body"><a target="_blank" href="https://www.youtube.com/watch?v=pFQ3rv2Ky3E">Intro to Relational Databases, Part II</a></div>
-
-          <div class="panel-body"><a target="_blank" href="https://www.youtube.com/watch?v=oK-zQhfV_GY">HTML & CSS Basics</a></div>
-
-          <div class="panel-body"><a target="_blank" href="https://www.youtube.com/watch?v=XBwuiDmqQzI&t=9s">Intro to SQL</a></div>
-          
-          <div class="panel-body"><a target="_blank" href="https://www.youtube.com/watch?v=HWNN7ZqBnFI">React Props</a></div>
+            <h4>Here are some of the courses I have taught at the university level:</h4>
+            <ul>
+              <li>Web Application Development (graduate level)</li>
+              <li>Design and Analysis of Algorithms</li>
+              <li></li>
+            </ul>
+          </p>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <button type="button" class="btn btn-primary btn-lg px-4 gap-3">
+              Primary button
+            </button>
+            <button type="button" class="btn btn-outline-secondary btn-lg px-4">
+              Secondary
+            </button>
+          </div>
         </div>
       </div>
-<hr>
-<div class="alert alert-info" role="alert">
-  <a target="_blank" href="https://medium.com/@pghayad/approaching-technical-interviews-bca8b8d1ba5d">My Blog</a>
-</div>
-  <div class="text-center" ></div><br>
-  <hr>
-<div id="contactme" style="background-color: lightblue;" class="container text-center">
- <a id="contactme"></a>
-      <h3>Contact Me</h3>
-      
-      <br>
-      <a href="https://x.com/tennisjava/">Follow me on X</a>
-      <a href="https://github.com/pghayad" target="_blank"><img width="25px" height="25px" src="/img/github.png"></a>
-      <a href="https://www.linkedin.com/in/pghayad/" target="_blank"><img width="25px" height="25px" src="/img/linkedin.png"></a>
-      <a href="mailto:pghayad@gmail.com" target="_blank"><img width="25px" height="25px" src="/img/gmail.png"></a>
-  </div>
-     
+      <div class="b-example-divider"></div>
+      <div class="px-4 pt-5 my-5 text-center border-bottom">
+        <h1 class="display-4 fw-bold text-body-emphasis">
+          Centered screenshot
+        </h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-4">
+            Quickly design and customize responsive mobile-first sites with
+            Bootstrap, the world’s most popular front-end open source toolkit,
+            featuring Sass variables and mixins, responsive grid system,
+            extensive prebuilt components, and powerful JavaScript plugins.
+          </p>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+            <button type="button" class="btn btn-primary btn-lg px-4 me-sm-3">
+              Primary button
+            </button>
+            <button type="button" class="btn btn-outline-secondary btn-lg px-4">
+              Secondary
+            </button>
+          </div>
+        </div>
+        <div class="overflow-hidden" style="max-height: 30vh">
+          <div class="container px-5">
+            <img
+              src="bootstrap-docs.png"
+              class="img-fluid border rounded-3 shadow-lg mb-4"
+              alt="Example image"
+              width="700"
+              height="500"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="b-example-divider"></div>
+      <div class="container col-xxl-8 px-4 py-5">
+        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+          <div class="col-10 col-sm-8 col-lg-6">
+            <img
+              src="bootstrap-themes.png"
+              class="d-block mx-lg-auto img-fluid"
+              alt="Bootstrap Themes"
+              width="700"
+              height="500"
+              loading="lazy"
+            />
+          </div>
+          <div class="col-lg-6">
+            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">
+              Responsive left-aligned hero with image
+            </h1>
+            <p class="lead">
+              Quickly design and customize responsive mobile-first sites with
+              Bootstrap, the world’s most popular front-end open source toolkit,
+              featuring Sass variables and mixins, responsive grid system,
+              extensive prebuilt components, and powerful JavaScript plugins.
+            </p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+              <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">
+                Primary
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-secondary btn-lg px-4"
+              >
+                Default
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="b-example-divider"></div>
+      <div class="container col-xl-10 col-xxl-8 px-4 py-5">
+        <div class="row align-items-center g-lg-5 py-5">
+          <div class="col-lg-7 text-center text-lg-start">
+            <h1 class="display-4 fw-bold lh-1 text-body-emphasis mb-3">
+              Vertically centered hero sign-up form
+            </h1>
+            <p class="col-lg-10 fs-4">
+              Below is an example form built entirely with Bootstrap’s form
+              controls. Each required form group has a validation state that can
+              be triggered by attempting to submit the form without completing
+              it.
+            </p>
+          </div>
+          <div class="col-md-10 mx-auto col-lg-5">
+            <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
+              <div class="form-floating mb-3">
+                <input
+                  type="email"
+                  class="form-control"
+                  id="floatingInput"
+                  placeholder="name@example.com"
+                />
+                <label for="floatingInput">Email address</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="floatingPassword"
+                  placeholder="Password"
+                />
+                <label for="floatingPassword">Password</label>
+              </div>
+              <div class="checkbox mb-3">
+                <label>
+                  <input type="checkbox" value="remember-me" /> Remember me
+                </label>
+              </div>
+              <button class="w-100 btn btn-lg btn-primary" type="submit">
+                Sign up
+              </button>
+              <hr class="my-4" />
+              <small class="text-body-secondary"
+                >By clicking Sign up, you agree to the terms of use.</small
+              >
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="b-example-divider"></div>
+      <div class="container my-5">
+        <div
+          class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg"
+        >
+          <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+            <h1 class="display-4 fw-bold lh-1 text-body-emphasis">
+              Border hero with cropped image and shadows
+            </h1>
+            <p class="lead">
+              Quickly design and customize responsive mobile-first sites with
+              Bootstrap, the world’s most popular front-end open source toolkit,
+              featuring Sass variables and mixins, responsive grid system,
+              extensive prebuilt components, and powerful JavaScript plugins.
+            </p>
+            <div
+              class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3"
+            >
+              <button
+                type="button"
+                class="btn btn-primary btn-lg px-4 me-md-2 fw-bold"
+              >
+                Primary
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-secondary btn-lg px-4"
+              >
+                Default
+              </button>
+            </div>
+          </div>
+          <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
+            <img
+              class="rounded-lg-3"
+              src="bootstrap-docs.png"
+              alt=""
+              width="720"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="b-example-divider"></div>
+      <div class="bg-dark text-secondary px-4 py-5 text-center">
+        <div class="py-5">
+          <h1 class="display-5 fw-bold text-white">Dark color hero</h1>
+          <div class="col-lg-6 mx-auto">
+            <p class="fs-5 mb-4">
+              Quickly design and customize responsive mobile-first sites with
+              Bootstrap, the world’s most popular front-end open source toolkit,
+              featuring Sass variables and mixins, responsive grid system,
+              extensive prebuilt components, and powerful JavaScript plugins.
+            </p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+              <button
+                type="button"
+                class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold"
+              >
+                Custom button
+              </button>
+              <button type="button" class="btn btn-outline-light btn-lg px-4">
+                Secondary
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="b-example-divider mb-0"></div>
+    </main>
+    <script
+      src="../assets/dist/js/bootstrap.bundle.min.js"
+      class="astro-vvvwv3sm"
+    ></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
-<br><br>
-<p id="test"></p>
-<div class="footer1 text-center">
-  <p style="color: white;">Copyright &#169; Paul Ghayad 2025</p>
-</div>
-
-</main>
-<script src="script.js"></script>
-</body>
+  </body>
 </html>
