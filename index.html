@@ -201,7 +201,7 @@
       </ul>
     </div>
     <main>
-      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Paul Ghayad</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -210,30 +210,30 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#home">Home</a>
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#about">About Me</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#myphilosophy">My Teaching Philosophy</a>
+                <a class="nav-link" href="#philosophy">My Teaching Philosophy</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#videos">Videos</a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link" href="#projects" role="button" aria-expanded="false">
                         Projects
                       </a>
-                      <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">A</a></li>
-                        <li><a class="dropdown-item" href="#">B</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">C</a></li>
-                      </ul>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#lesson">Complimentary Lesson</a>
                     </li>
                      <li class="nav-item">
-                      <a class="nav-link" href="#contact">Contact Me</a>
+                      <a class="nav-link" href="#signup">Sign Up</a>
+                    </li>
+                     <li class="nav-item">
+                      <a class="nav-link" href="#contactme">Contact Me</a>
                     </li>
                   </ul>
                   <!-- <form class="d-flex" role="search">
@@ -287,8 +287,9 @@
                       <li>React</li>
                       <li>Node</li>
                       <li>JavaScript ES6</li>
-                      <li>HTML</li>
-                      <li>CSS</li>
+                      <li>HTML5</li>
+                      <li>CSS3</li>
+                      <li>Bootstrap 5</li>
                       <li>SQL</li>
                       <li>Java</li>
                       <li>Python</li>
@@ -308,7 +309,7 @@
         </div>
       </div>
       <div class="b-example-divider"></div>
-      <div class="px-4 pt-5 my-5 text-center border-bottom">
+      <div class="px-4 pt-5 my-5 text-center border-bottom" id="about">
         <h1 class="display-4 fw-bold text-body-emphasis">
           About Me
         </h1>
@@ -321,8 +322,9 @@
             in these fields.
           </p>
           <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-            <button type="button" class="btn btn-primary btn-lg px-4 me-sm-3">
-              Read More...
+            <button type="button" class="btn btn-lg">
+
+              <a target="_blank" href="https://medium.com/@pghayad/">My Blog</a>
             </button>
           </div>
         </div>
@@ -338,7 +340,7 @@
         </div>
       </div>
       <div class="b-example-divider"></div>
-      <div class="container col-xxl-8 px-4 py-5">
+      <div class="container col-xxl-8 px-4 py-5" id="philosophy">
         <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
           <div class="col-10 col-sm-8 col-lg-6">
             <img
@@ -361,15 +363,12 @@
               strict coding with a flexible infusion of creativity.
             </p>
             <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-              <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">
-                Read More...
-              </button>
             </div>
           </div>
         </div>
       </div>
       <div class="b-example-divider"></div>
-      <div class="container col-xl-10 col-xxl-8 px-4 py-5">
+      <div class="container col-xl-10 col-xxl-8 px-4 py-5" id="videos">
         <div class="row align-items-center g-lg-5 py-5">
           <div class="col-lg-7 text-center text-lg-start">
             <h1 class="display-4 fw-bold lh-1 text-body-emphasis mb-3">
@@ -397,7 +396,7 @@
         </div>
       </div>
       <div class="b-example-divider"></div>
-      <div class="container my-5">
+      <div class="container my-5" id="projects">
         <div
           class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg"
         >
@@ -435,21 +434,53 @@
           </div>
         </div>
       </div>
+       <div class="b-example-divider"></div>
+      <div class="container my-5" id="lesson">
+        <div
+          class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg"
+        >
+          <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+            <h1 class="display-4 fw-bold lh-1 text-body-emphasis">
+              Free Lesson
+            </h1>
+            <p class="lead">
+              Sign Up For A Complimentary, Online Lesson With Me!
+              <h5>We can meet for one-hour and see if you like coding.  The process of building projects from scratch
+                can be quite rewarding.  Also, we can talk about what a future in coding entails, and whether
+                it's the right one for you.
+                <br>
+              <p style="text-align: center;">
+                <button class="btn btn-lg"><a target="_blank" href="https://forms.gle/yoqGrpEJE8dpSMpdA">Sign Up Now!</a></button>
+
+              </p>
+
+              </h5>
+            </p>
+
+          </div>
+          <div class="col-md-10 mx-auto col-lg-5">
+           <img
+              src="./img/mac.jpg"
+              class="d-block mx-lg-auto img-fluid"
+              alt="Bootstrap Themes"
+              width="700"
+              height="500"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
       <div class="b-example-divider"></div>
-      <div class="bg-dark text-secondary px-4 py-5 text-center">
+      <div class="bg-dark text-secondary px-4 py-5 text-center" id="signup">
         <div class="py-5">
-          <h1 class="display-5 fw-bold text-white">Contact Me For Lessons</h1>
+          <h1 class="display-5 fw-bold text-white">Sign Up For Lessons</h1>
           <div class="col-lg-6 mx-auto">
             <p class="fs-5 mb-4">
               Feel free to reach out about potential lessons! See coding camp options below:
-              <ul>
-                <li>Basic, $2500, 4 months</li>
-                <li>Premium, $3000, 5 months</li>
-                <li>Platinum, $3500, 6 months</li>
-              </ul>
+              <button class="btn btn-lg"><a target="_blank" href="https://forms.gle/iTzxt1sRF2FE4WVC9">Sign Up Now!</a></button>
             </p>
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-               <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
+               <!-- <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
               <div class="form-floating mb-3">
                 <input
                   type="email"
@@ -480,12 +511,33 @@
               <small class="text-body-secondary"
                 >By clicking Sign up, you agree to the terms of use.</small
               >
-            </form>
+            </form> -->
+  <div class="text-center" ></div><br>
+  <hr>
+
+
+
             </div>
           </div>
         </div>
       </div>
       <div class="b-example-divider mb-0"></div>
+      <div id="contactme" style="background-color: lightblue;" class="container text-center">
+      <h3>Contact Me</h3>
+      
+      <br>
+      <a href="https://x.com/tennisjava/"><img width="25px" height="25px" src="./img/x.jpg"></a>
+      <a href="https://github.com/pghayad" target="_blank"><img width="25px" height="25px" src="./img/github.png"></a>
+      <a href="https://www.linkedin.com/in/pghayad/" target="_blank"><img width="25px" height="25px" src="./img/linkedin.png"></a>
+      <a href="mailto:pghayad@gmail.com" target="_blank"><img width="25px" height="25px" src="./img/gmail.png"></a>
+  </div>
+     
+
+<br><br>
+<p id="test"></p>
+<div class="footer1 text-center">
+  <p style="color: blue;">Copyright &#169; Paul Ghayad; July 2026</p>
+</div>
     </main>
     <script
       src="../assets/dist/js/bootstrap.bundle.min.js"
