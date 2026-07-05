@@ -10,7 +10,7 @@
       content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
     />
     <meta name="generator" content="Astro v5.13.2" />
-    <title>Heroes · Bootstrap v5.3</title>
+    <title>Portfolio of Paul Ghayad</title>
     <link
       rel="canonical"
       href="https://getbootstrap.com/docs/5.3/examples/heroes/"
@@ -20,6 +20,12 @@
     <meta name="theme-color" content="#712cf9" />
     <link href="heroes.css" rel="stylesheet" />
     <style>
+      a {
+          display: inline-block; /* Allows proper spacing and padding */
+          border: 2px solid #007BFF; /* Thickness, style, and color */
+          padding: 8px 16px; /* Adds space between text and border */
+          text-decoration: none; /* Removes the default underline */
+      }
       ul {
         list-style-type: none;
         padding: 0;
@@ -336,7 +342,7 @@
         <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
           <div class="col-10 col-sm-8 col-lg-6">
             <img
-              src="bootstrap-themes.png"
+              src="./img/socrates.jpg"
               class="d-block mx-lg-auto img-fluid"
               alt="Bootstrap Themes"
               width="700"
@@ -371,11 +377,79 @@
             </h1>
             <p class="col-lg-10 fs-4">
               Watch some of my lecture videos!
-
+              <br>
+              <a href="https://www.youtube.com/watch?v=RbJdN0ztPKU" target="_blank">A React and Node Web Application</a><br>
+              <a href="https://www.youtube.com/watch?v=1pkMI79dUTk" target="_blank">The CSS Box Model</a><br>
+              <a href="https://www.youtube.com/watch?v=juc7lqfepVk" target="_blank">Introduction to Relational Databases</a><br>
+              <a href="https://www.youtube.com/channel/UCbalvSnGB1mtA5j0AsFDJ5A">And More!</a>
             </p>
           </div>
           <div class="col-md-10 mx-auto col-lg-5">
-            <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
+           <img
+              src="./img/video_camera.jpg"
+              class="d-block mx-lg-auto img-fluid"
+              alt="Bootstrap Themes"
+              width="700"
+              height="500"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="b-example-divider"></div>
+      <div class="container my-5">
+        <div
+          class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg"
+        >
+          <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+            <h1 class="display-4 fw-bold lh-1 text-body-emphasis">
+              Projects
+            </h1>
+            <p class="lead">
+              Take a look at some of my handmade projects!
+            </p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
+              <div  class="panel panel-warning">
+                <div class="panel-body"><a target="_blank" href="./weatherapp/index.html">Weather App</a></div>
+                <div class="panel-body"><a target="_blank" href="./cocktailapp/index.html">Cocktail App</a></div>
+                <div class="panel-body"><a target="_blank" href="./videopoker/index.html">Video Poker</a></div>
+                <div class="panel-body"><a target="_blank" href="./crazyeights/index.html">Crazy Eights</a></div>
+                <div class="panel-body"><a target="_blank" href="./hangman/index.html">Hangman</a></div>
+                <div class="panel-body"><a target="_blank" href="./memorygame/index.html">The Memory Game</a></div>
+                <div class="panel-body"><a target="_blank" href="./war/index.html">The Game Of War</a></div>
+                <div class="panel-body"><a target="_blank" href="./rockpaperscissors/index.html">Rock Paper Scissors</a></div>
+                <div class="panel-body"><a target="_blank" href="./tictactoe/index.html">Tic Tac Toe</a></div>
+                <!--<div class="panel-body"><a target="_blank" href="/csc353-fullstack-app/index.html">CSC353 App</a></div>-->
+              </div>
+            </div>
+          </div>
+          <div class="col-md-10 mx-auto col-lg-5">
+           <img
+              src="./img/project.png"
+              class="d-block mx-lg-auto img-fluid"
+              alt="Bootstrap Themes"
+              width="700"
+              height="500"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="b-example-divider"></div>
+      <div class="bg-dark text-secondary px-4 py-5 text-center">
+        <div class="py-5">
+          <h1 class="display-5 fw-bold text-white">Contact Me For Lessons</h1>
+          <div class="col-lg-6 mx-auto">
+            <p class="fs-5 mb-4">
+              Feel free to reach out about potential lessons! See coding camp options below:
+              <ul>
+                <li>Basic, $2500, 4 months</li>
+                <li>Premium, $3000, 5 months</li>
+                <li>Platinum, $3500, 6 months</li>
+              </ul>
+            </p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+               <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
               <div class="form-floating mb-3">
                 <input
                   type="email"
@@ -407,71 +481,6 @@
                 >By clicking Sign up, you agree to the terms of use.</small
               >
             </form>
-          </div>
-        </div>
-      </div>
-      <div class="b-example-divider"></div>
-      <div class="container my-5">
-        <div
-          class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg"
-        >
-          <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
-            <h1 class="display-4 fw-bold lh-1 text-body-emphasis">
-              Projects
-            </h1>
-            <p class="lead">
-              Take a look at some of my handmade projects!
-            </p>
-            <div
-              class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3"
-            >
-              <button
-                type="button"
-                class="btn btn-primary btn-lg px-4 me-md-2 fw-bold"
-              >
-                Primary
-              </button>
-              <button
-                type="button"
-                class="btn btn-outline-secondary btn-lg px-4"
-              >
-                Default
-              </button>
-            </div>
-          </div>
-          <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
-            <img
-              class="rounded-lg-3"
-              src="bootstrap-docs.png"
-              alt=""
-              width="720"
-            />
-          </div>
-        </div>
-      </div>
-      <div class="b-example-divider"></div>
-      <div class="bg-dark text-secondary px-4 py-5 text-center">
-        <div class="py-5">
-          <h1 class="display-5 fw-bold text-white">Contact Me For Lessons</h1>
-          <div class="col-lg-6 mx-auto">
-            <p class="fs-5 mb-4">
-              Feel free to reach out about potential lessons! See coding camp options below:
-              <ul>
-                <li>Basic, $2500, 4 months</li>
-                <li>Premium, $3000, 5 months</li>
-                <li>Platinum, $3500, 6 months</li>
-              </ul>
-            </p>
-            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-              <button
-                type="button"
-                class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold"
-              >
-                Custom button
-              </button>
-              <button type="button" class="btn btn-outline-light btn-lg px-4">
-                Secondary
-              </button>
             </div>
           </div>
         </div>
