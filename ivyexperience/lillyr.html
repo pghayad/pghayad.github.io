@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lilly Reckers Study Page - SAT - Ivy Experience</title>
+    <style>
+        body {
+            background-color: pink;
+        }
+
+        h1, h2 {
+            color: blueviolet;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Lilly's SAT Study Page - Ivy Experience</h1>
+<h1 id="word"></h1>
+<h2 id="definition"></h2>
+<button id="btnVocab" onclick="doVocab()">Vocabulary</button>
+
+
+<script>
+    let words = ['abate', 'abdicate', 'aberration', 'abhor', 'abstain', 'abstruse',
+        'inevitable', 'fortuitously', 'provoke', 'vex', 'perennially', 'benign',
+        'banal', 'acumen'
+    ];
+
+    let definitions = [
+        'lessen, reduce', 'resign, give up, surrender', 'anomaly, something that stands out from the rest',
+        'detest, hate', 'refrain from doing', 'complex, difficult to understand', 'definitely going to happen', 'luckily, positively',
+        'irk, vex, irritate, annoy', 'irk, irriate, provoke', 'lasting forever, infinitely', 'harmless',
+        'boring, trite, commonplace', 'shrewdness, cunning, clever, smart'
+    ]
+
+    let counter = 0;
+
+    function doVocab(){
+
+        document.querySelector('#word').innerHTML=words[counter];
+        document.querySelector('#definition').innerHTML=definitions[counter];
+        document.querySelector('#btnVocab').innerHTML='Next';
+        
+        if(counter == words.length-1){
+            document.querySelector('#btnVocab').innerHTML='Done';
+            document.querySelector('#btnVocab').disabled=true;
+        }else{
+            counter++;
+        }
+        
+    }
+</script>
+</body>
+</html>
+
+
