@@ -19,40 +19,83 @@
 
 <h1>Lilly's SAT Study Page - Ivy Experience</h1>
 <h1 id="word"></h1>
-<h2 id="definition"></h2>
+<h2 hidden id="definition"></h2>
 <button id="btnVocab" onclick="doVocab()">Vocabulary</button>
+<button hidden id="btnDef" onclick="showDef()">Show Definition</button>
+<button hidden disabled id="btnBack" onclick="back()">Back</button>
+<button hidden id="btnNext" onclick="next()">Next</button>
 
 
 <script>
     let words = ['abate', 'abdicate', 'aberration', 'abhor', 'abstain', 'abstruse',
         'inevitable', 'fortuitously', 'provoke', 'vex', 'perennially', 'benign',
         'banal', 'acumen', 'aloof', 'debauchery', 'incite', 'tenet', 'edict', 'precipitate', 'forestall',
-        'rancor', 'ostensibly', 'haughty'
+        'rancor', 'ostensibly', 'haughty', 'adulation', 'adversity', 'amicable', 'antagonist'
+
     ];
 
     let definitions = [
         'lessen, reduce', 'resign, give up, surrender', 'anomaly, something that stands out from the rest',
         'detest, hate', 'refrain from doing', 'complex, difficult to understand', 'definitely going to happen', 'luckily, positively',
-        'irk, vex, irritate, annoy', 'irk, irriate, provoke', 'lasting forever, infinitely', 'harmless',
+        'irk, vex, irritate, annoy', 'irk, irritate, provoke', 'lasting forever, infinitely', 'harmless, innocuous',
         'boring, trite, commonplace', 'shrewdness, cunning, clever, smart', 'not grounded, wayward', 
         'outlandish or sinful behavior', 'start up, generate', 'principle, order', 'law, decree', 
         'come before (an event)', 'stall, distract', 'hatred, bitterness', 'outwardly showing a way, but inside may feel different',
-        'showy, grandiose, arrogant'
+        'showy, grandiose, arrogant', 'flattery, praise, admiration', 'hardship, misfortune', 'friendly, agreeable, cordial',
+        'opponent, adversary, rival'
     ]
 
     let counter = 0;
 
-    function doVocab(){
+    function showDef(){
+        if(document.querySelector('#definition').hidden == true){
+            document.querySelector('#definition').hidden=false;
+            document.querySelector('#btnDef').innerHTML='Hide Definition'
+        }else{
+            document.querySelector('#definition').hidden=true;
+            document.querySelector('#btnDef').innerHTML='Show Definition'
+        }
+            
+    }
 
+    function doVocab(){
+        document.querySelector('#btnVocab').hidden=true;
+        document.querySelector('#btnBack').hidden=false;
+        document.querySelector('#btnNext').hidden=false;
+        document.querySelector('#btnDef').hidden=false;
         document.querySelector('#word').innerHTML=words[counter];
         document.querySelector('#definition').innerHTML=definitions[counter];
-        document.querySelector('#btnVocab').innerHTML='Next';
-        
-        if(counter == words.length-1){
-            document.querySelector('#btnVocab').innerHTML='Done';
-            document.querySelector('#btnVocab').disabled=true;
+    }
+
+    function back(){
+        console.log('back: ' + counter)
+        if(counter > 0)
+            counter--;
+        document.querySelector('#word').innerHTML=words[counter];
+        document.querySelector('#definition').innerHTML=definitions[counter];
+        document.querySelector('#btnNext').disabled=false;
+
+        if(counter == 0){
+            document.querySelector('#btnBack').disabled=true;
         }else{
-            counter++;
+            //counter--;
+        }
+    }
+
+    function next(){
+        console.log('next: ' + counter)
+        counter++;
+        document.querySelector('#word').innerHTML=words[counter];
+        document.querySelector('#definition').innerHTML=definitions[counter];
+        document.querySelector('#btnBack').disabled=false;
+        
+        if(counter == 0){
+            document.querySelector('#btnBack').disabled=true;
+        }else if(counter == words.length-1){
+            document.querySelector('#btnNext').disabled=true;
+            //counter++;
+        }else{
+            document.querySelector('#btnNext').disabled=false;
         }
         
     }
