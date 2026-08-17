@@ -2,24 +2,113 @@
 <html>
 <head>
     <title>Gemma Gardner Study Page - ACT - Ivy Experience</title>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  </head>
     <style>
         body {
             background-color: lightcoral;
         }
 
-
+        h1, h2 {
+            color: blueviolet;
+        }
     </style>
+    
 </head>
 <body>
 
 <h1>Gemma's ACT Study Page - Ivy Experience</h1>
-<button>English</button>
-<button>Math</button>
-<button>Reading</button>
-<button>Science</button>
-<script>
+<img width="250px" height="250px" src="https://img.thesitebase.net/10681/10681568/products/ver_1/17847955593c01bd6163.jpeg?width=1920&height=0&min_height=0" />
+<h1 id="word"></h1>
+<h2 hidden id="definition"></h2>
+<button id="btnVocab" onclick="doEnglish()">English</button>
+<button id="btnGrammar" onclick="doMath()">Math</button>
+<button hidden id="btnMainMenu" onclick="returnToMain()">Return To Main Menu</button>
+<button id="btnReading" onclick="showReading()">Reading</button>
+<button id="btnScience" onclick="showScience()">Science</button>
 
+<button hidden id="btnDef" onclick="showDef()">Show Definition</button>
+<button hidden disabled id="btnBack" onclick="back()">Back</button>
+<button hidden id="btnNext" onclick="next()">Next</button>
+
+
+<script>
+    let words = ['abate', 'abdicate', 'aberration', 'abhor', 'abstain', 'abstruse',
+        'inevitable', 'fortuitously', 'provoke', 'vex', 'perennially', 'benign',
+        'banal', 'acumen', 'aloof', 'debauchery', 'incite', 'tenet', 'edict', 'precipitate', 'forestall',
+        'rancor', 'ostensibly', 'haughty', 'adulation', 'adversity', 'amicable', 'antagonist'
+
+    ];
+
+    let definitions = [
+        'lessen, reduce', 'resign, give up, surrender', 'anomaly, something that stands out from the rest',
+        'detest, hate', 'refrain from doing', 'complex, difficult to understand', 'definitely going to happen', 'luckily, positively',
+        'irk, vex, irritate, annoy', 'irk, irritate, provoke', 'lasting forever, infinitely', 'harmless, innocuous',
+        'boring, trite, commonplace', 'shrewdness, cunning, clever, smart', 'not grounded, wayward', 
+        'outlandish or sinful behavior', 'start up, generate', 'principle, order', 'law, decree', 
+        'come before (an event)', 'stall, distract', 'hatred, bitterness', 'outwardly showing a way, but inside may feel different',
+        'showy, grandiose, arrogant', 'flattery, praise, admiration', 'hardship, misfortune', 'friendly, agreeable, cordial',
+        'opponent, adversary, rival'
+    ]
+
+    let counter = 0;
+    let showMainMenu = false;
+
+    function doMath(){
+        
+    }
+
+    function returnToMain(){
+        
+    }
+    function showReading(){
+    
+        
+    }
+
+    function showDef(){
+     
+            
+    }
+
+    function doEnglish(){
+      
+    }
+
+    function back(){
+        console.log('back: ' + counter)
+        if(counter > 0)
+            counter--;
+        document.querySelector('#word').innerHTML=words[counter];
+        document.querySelector('#definition').innerHTML=definitions[counter];
+        document.querySelector('#btnNext').disabled=false;
+
+        if(counter == 0){
+            document.querySelector('#btnBack').disabled=true;
+        }else{
+            //counter--;
+        }
+    }
+
+    function next(){
+        console.log('next: ' + counter)
+        counter++;
+        document.querySelector('#word').innerHTML=words[counter];
+        document.querySelector('#definition').innerHTML=definitions[counter];
+        document.querySelector('#btnBack').disabled=false;
+        
+        if(counter == 0){
+            document.querySelector('#btnBack').disabled=true;
+        }else if(counter == words.length-1){
+            document.querySelector('#btnNext').disabled=true;
+            //counter++;
+        }else{
+            document.querySelector('#btnNext').disabled=false;
+        }
+        
+    }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>
 
