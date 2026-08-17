@@ -21,6 +21,9 @@
 <h1 id="word"></h1>
 <h2 hidden id="definition"></h2>
 <button id="btnVocab" onclick="doVocab()">Vocabulary</button>
+<button id="btnGrammar" onclick="doGrammar()">Grammar</button>
+<button hidden id="btnMainMenu" onclick="returnToMain()">Return To Main Menu</button>
+<button id="btnTrans" onclick="showTrans()">Transition Words</button>
 <button hidden id="btnDef" onclick="showDef()">Show Definition</button>
 <button hidden disabled id="btnBack" onclick="back()">Back</button>
 <button hidden id="btnNext" onclick="next()">Next</button>
@@ -46,6 +49,53 @@
     ]
 
     let counter = 0;
+    let showMainMenu = false;
+
+    function doGrammar(){
+        document.querySelector('#word').innerHTML='A semicolon (;) separates two complete sentences.<br><br>'+
+        'Example: Jess was sick yesterday; nevertheless, she still did well on her science exam.<br><br>'+
+        'A comma (,) can also separate two complete sentences with the words: and, but, yet, so.<br><br>'+
+        'Example: John was an athlete, so he liked running around.'
+        document.querySelector('#btnMainMenu').hidden=false;
+        document.querySelector('#btnGrammar').hidden=true;
+        document.querySelector('#btnVocab').hidden=true;
+        document.querySelector('#btnTrans').hidden=true;
+    }
+
+    function returnToMain(){
+        document.querySelector('#btnMainMenu').hidden=true;
+        document.querySelector('#btnGrammar').hidden=false;
+        document.querySelector('#btnDef').hidden=true;
+        document.querySelector('#definition').hidden=true;
+        document.querySelector('#btnTrans').hidden=false;
+        document.querySelector('#btnVocab').hidden=false;
+        document.querySelector('#btnBack').hidden=true;
+        document.querySelector('#btnNext').hidden=true;
+        document.querySelector('#word').innerHTML=''
+        document.querySelector('#btnTrans').innerHTML='Transition Words';
+    }
+    function showTrans(){
+        document.querySelector('#btnGrammar').hidden=true;
+        console.log(showMainMenu)
+        if(!showMainMenu){
+            document.querySelector('#btnTrans').innerHTML='Return to Main Menu';
+            document.querySelector('#word').innerHTML='Contrast Words: although, even though, nevertheless, despite, however,' + 
+        'on the other hand<br><br>Example: Although she was a fast sprinter, Laura was slow at long-distance running.'
+        +'<br><br>John did great at the Math section of the SAT; however, his Reading performance was atrocious.'
+        
+        +'<br><br>Conclusion Words: thus, therefore, ergo, hence<br><br>It was raining; thus, Jill took her umbrella to work.'
+            showMainMenu=true;
+            document.querySelector('#btnVocab').hidden=true;
+            document.querySelector('#btnGrammar').hidden=true;
+        }else{
+            document.querySelector('#btnVocab').hidden=false;
+            document.querySelector('#btnGrammar').hidden=false;
+            showMainMenu=false;
+            document.querySelector('#word').innerHTML=''
+            document.querySelector('#btnTrans').innerHTML='Transition Words';
+        }
+        
+    }
 
     function showDef(){
         if(document.querySelector('#definition').hidden == true){
@@ -59,6 +109,9 @@
     }
 
     function doVocab(){
+        document.querySelector('#btnGrammar').hidden=true;
+        document.querySelector('#btnMainMenu').hidden=false;
+        document.querySelector('#btnTrans').hidden=true;
         document.querySelector('#btnVocab').hidden=true;
         document.querySelector('#btnBack').hidden=false;
         document.querySelector('#btnNext').hidden=false;
