@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kenny's Page</title>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  </head>
+    <style>
+        body {
+            background-color: black;
+        }
+
+        h1, h2 {
+            color: yellow;
+        }
+    </style>
+    
+</head>
+<body>
+
+<h1>Hey Kenny! What's Up? It's Paul! Go study some vocab :-)</h1>
+<img width="250px" height="250px" src="https://content-prod-live.cert.starbucks.com/binary/v2/asset/137-111529.jpg" />
+<h1 id="word"></h1>
+<h2 hidden id="definition"></h2>
+<button id="btnVocab" onclick="doVocab()">Vocabulary</button>
+<button id="btnGrammar" onclick="doGrammar()">Grammar</button>
+<button hidden id="btnMainMenu" onclick="returnToMain()">Return To Main Menu</button>
+<button id="btnTrans" onclick="showTrans()">Transition Words</button>
+<button hidden id="btnDef" onclick="showDef()">Show Definition</button>
+<button hidden disabled id="btnBack" onclick="back()">Back</button>
+<button hidden id="btnNext" onclick="next()">Next</button>
+
+
+<script>
+    let words = ['abate', 'abdicate', 'aberration', 'abhor', 'abstain', 'abstruse',
+        'inevitable', 'fortuitously', 'provoke', 'vex', 'perennially', 'benign',
+        'banal', 'acumen', 'aloof', 'debauchery', 'incite', 'tenet', 'edict', 'precipitate', 'forestall',
+        'rancor', 'ostensibly', 'haughty', 'adulation', 'adversity', 'amicable', 'antagonist'
+
+    ];
+
+    let definitions = [
+        'lessen, reduce', 'resign, give up, surrender', 'anomaly, something that stands out from the rest',
+        'detest, hate', 'refrain from doing', 'complex, difficult to understand', 'definitely going to happen', 'luckily, positively',
+        'irk, vex, irritate, annoy', 'irk, irritate, provoke', 'lasting forever, infinitely', 'harmless, innocuous',
+        'boring, trite, commonplace', 'shrewdness, cunning, clever, smart', 'not grounded, wayward', 
+        'outlandish or sinful behavior', 'start up, generate', 'principle, order', 'law, decree', 
+        'come before (an event)', 'stall, distract', 'hatred, bitterness', 'outwardly showing a way, but inside may feel different',
+        'showy, grandiose, arrogant', 'flattery, praise, admiration', 'hardship, misfortune', 'friendly, agreeable, cordial',
+        'opponent, adversary, rival'
+    ]
+
+    let counter = 0;
+    let showMainMenu = false;
+
+    function doGrammar(){
+        document.querySelector('#word').innerHTML='A semicolon (;) separates two complete sentences.<br><br>'+
+        'Example: Jess was sick yesterday; nevertheless, she still did well on her science exam.<br><br>'+
+        'A comma (,) can also separate two complete sentences with the words: and, but, yet, so.<br><br>'+
+        'Example: John was an athlete, so he liked running around.'
+        document.querySelector('#btnMainMenu').hidden=false;
+        document.querySelector('#btnGrammar').hidden=true;
+        document.querySelector('#btnVocab').hidden=true;
+        document.querySelector('#btnTrans').hidden=true;
+    }
+
+    function returnToMain(){
+        document.querySelector('#btnMainMenu').hidden=true;
+        document.querySelector('#btnGrammar').hidden=false;
+        document.querySelector('#btnDef').hidden=true;
+        document.querySelector('#definition').hidden=true;
+        document.querySelector('#btnTrans').hidden=false;
+        document.querySelector('#btnVocab').hidden=false;
+        document.querySelector('#btnBack').hidden=true;
+        document.querySelector('#btnNext').hidden=true;
+        document.querySelector('#word').innerHTML=''
+        document.querySelector('#btnTrans').innerHTML='Transition Words';
+    }
+    function showTrans(){
+        document.querySelector('#btnGrammar').hidden=true;
+        console.log(showMainMenu)
+        if(!showMainMenu){
+            document.querySelector('#btnTrans').innerHTML='Return to Main Menu';
+            document.querySelector('#word').innerHTML='Contrast Words: although, even though, nevertheless, despite, however,' + 
+        'on the other hand<br><br>Example: Although she was a fast sprinter, Laura was slow at long-distance running.'
+        +'<br><br>John did great at the Math section of the SAT; however, his Reading performance was atrocious.'
+        
+        +'<br><br>Conclusion Words: thus, therefore, ergo, hence<br><br>It was raining; thus, Jill took her umbrella to work.'
+            showMainMenu=true;
+            document.querySelector('#btnVocab').hidden=true;
+            document.querySelector('#btnGrammar').hidden=true;
+        }else{
+            document.querySelector('#btnVocab').hidden=false;
+            document.querySelector('#btnGrammar').hidden=false;
+            showMainMenu=false;
+            document.querySelector('#word').innerHTML=''
+            document.querySelector('#btnTrans').innerHTML='Transition Words';
+        }
+        
+    }
+
+    function showDef(){
+        if(document.querySelector('#definition').hidden == true){
+            document.querySelector('#definition').hidden=false;
+            document.querySelector('#btnDef').innerHTML='Hide Definition'
+        }else{
+            document.querySelector('#definition').hidden=true;
+            document.querySelector('#btnDef').innerHTML='Show Definition'
+        }
+            
+    }
+
+    function doVocab(){
+        document.querySelector('#btnGrammar').hidden=true;
+        document.querySelector('#btnMainMenu').hidden=false;
+        document.querySelector('#btnTrans').hidden=true;
+        document.querySelector('#btnVocab').hidden=true;
+        document.querySelector('#btnBack').hidden=false;
+        document.querySelector('#btnNext').hidden=false;
+        document.querySelector('#btnDef').hidden=false;
+        document.querySelector('#word').innerHTML=words[counter];
+        document.querySelector('#definition').innerHTML=definitions[counter];
+    }
+
+    function back(){
+        console.log('back: ' + counter)
+        if(counter > 0)
+            counter--;
+        document.querySelector('#word').innerHTML=words[counter];
+        document.querySelector('#definition').innerHTML=definitions[counter];
+        document.querySelector('#btnNext').disabled=false;
+
+        if(counter == 0){
+            document.querySelector('#btnBack').disabled=true;
+        }else{
+            //counter--;
+        }
+    }
+
+    function next(){
+        console.log('next: ' + counter)
+        counter++;
+        document.querySelector('#word').innerHTML=words[counter];
+        document.querySelector('#definition').innerHTML=definitions[counter];
+        document.querySelector('#btnBack').disabled=false;
+        
+        if(counter == 0){
+            document.querySelector('#btnBack').disabled=true;
+        }else if(counter == words.length-1){
+            document.querySelector('#btnNext').disabled=true;
+            //counter++;
+        }else{
+            document.querySelector('#btnNext').disabled=false;
+        }
+        
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
