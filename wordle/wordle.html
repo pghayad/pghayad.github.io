@@ -1,0 +1,288 @@
+<!-- 
+  Wordle
+  Day 1
+  September 5th 2026
+  by Paul Ghayad
+  14:11 at 22nd and South Starbucks
+
+  Day 2
+  September 6th 2026
+  10:38 at broad and washington starbucks
+
+
+-->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Wordle, by Paul Ghayad</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    input.success-placeholder::placeholder {
+      background-color: green;
+      opacity: 1;
+    }
+
+    input.error-placeholder::placeholder {
+      background-color: #ff0000;
+      opacity: 1;
+    }
+
+    ::placeholder {
+      background-color: red;
+      opacity: 1; /* Firefox */
+    }
+  </style>
+</head>
+<body>
+
+<div class="jumbotron text-center">
+  <h1>Wordle</h1>
+  <p>Try to guess the 5 letter English word in 6 attempts or less!</p> 
+</div>
+  
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="autotab-container">
+        <span id="word1">
+            <input id="let1" size="1" type="text" class="autotab-input" maxlength="1" placeholder="">
+            <input id="let2" size="1" type="text" class="autotab-input" maxlength="1" placeholder="">
+            <input id="let3" size="1" type="text" class="autotab-input" maxlength="1" placeholder="">
+            <input id="let4" size="1" type="text" class="autotab-input" maxlength="1" placeholder="">
+            <input id="let5" size="1" type="text" class="autotab-input" maxlength="1" placeholder="">
+        </span><br>
+        <span inert id="word2">
+            <input size="1" type="text" class="autotab-input" maxlength="1" placeholder="">
+            <input size="1" type="text" class="autotab-input" maxlength="1" placeholder="">
+            <input size="1" type="text" class="autotab-input" maxlength="1" placeholder="">
+            <input size="1" type="text" class="autotab-input" maxlength="1" placeholder="">
+            <input size="1" type="text" class="autotab-input" maxlength="1" placeholder="">
+        </span><br>
+        <span inert id="word3">
+            <input size="1" type="text" class="autotab-input" maxlength="1" placeholder="">
+            <input size="1" type="text" class="autotab-input" maxlength="1" placeholder="">
+            <input size="1" type="text" class="autotab-input" maxlength="1" placeholder="">
+            <input size="1" type="text" class="autotab-input" maxlength="1" placeholder="">
+            <input size="1" type="text" class="autotab-input" maxlength="1" placeholder="">
+        </span><br>
+        <span inert id="word4">
+            <input size="1" type="text" class="autotab-input" maxlength="1" placeholder="">
+            <input size="1" type="text" class="autotab-input" maxlength="1" placeholder="">
+            <input size="1" type="text" class="autotab-input" maxlength="1" placeholder="">
+            <input size="1" type="text" class="autotab-input" maxlength="1" placeholder="">
+            <input size="1" type="text" class="autotab-input" maxlength="1" placeholder="">
+        </span><br>
+        <span inert id="word5">
+            <input size="1" type="text" class="autotab-input" maxlength="1" placeholder="">
+            <input size="1" type="text" class="autotab-input" maxlength="1" placeholder="">
+            <input size="1" type="text" class="autotab-input" maxlength="1" placeholder="">
+            <input size="1" type="text" class="autotab-input" maxlength="1" placeholder="">
+            <input size="1" type="text" class="autotab-input" maxlength="1" placeholder="">
+        </span><br>
+        <span inert id="word6">
+            <input size="1" type="text" class="autotab-input" maxlength="1" placeholder="">
+            <input size="1" type="text" class="autotab-input" maxlength="1" placeholder="">
+            <input size="1" type="text" class="autotab-input" maxlength="1" placeholder="">
+            <input size="1" type="text" class="autotab-input" maxlength="1" placeholder="">
+            <input size="1" type="text" class="autotab-input" maxlength="1" placeholder="">
+        </span><br>
+       
+      </div>
+
+      <!-- Submit Button -->
+      <button id="btnSubmit" onclick="guess()">Submit</button>
+    </div>
+    <div class="col-sm-6">
+      <h3>Guessed Letters</h3>
+              <div class="container">
+                <div class="col-sm-3">
+                  <div class="col">A</div>
+                  <div class="col">B</div>
+                  <div class="col">C</div>
+                  <div class="col">D</div>
+                  <div class="col">E</div>
+                  <div class="col">F</div>
+                  <div class="col">G</div>
+                  <div class="col">H</div>
+                  <div class="col">I</div>
+                  <div class="col">J</div>
+                  <div class="col">K</div>
+                  <div class="col">L</div>
+                  <div class="col">M</div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="col-8">N</div>
+                  <div class="col-4">O</div>
+                  <div class="col-8">P</div>
+                  <div class="col-4">Q</div>
+                  <div class="col-8">R</div>
+                  <div class="col-4">S</div>
+                  <div class="col-8">T</div>
+                  <div class="col-4">U</div>
+                  <div class="col-8">V</div>
+                  <div class="col-4">W</div>
+                  <div class="col-8">X</div>
+                  <div class="col-4">Y</div>
+                  <div class="col-4">Z</div>
+                </div>
+              </div>
+          </div>
+  </div>
+</div>
+
+
+<script>
+
+  /*
+    September 6th 2026
+
+    To Do:
+      - Prevent yellow duplicates: if there's only one of that letter and it is guessed twice, only 1 yellow should show up.
+
+      -
+
+
+  */
+
+  let words = ["favor", "river", "ponds", "flick"]
+  let index = Math.round(Math.random()*(words.length-1));
+  let word = words[index]
+  let guesses = 6;
+  let wordCounter = 1;
+  let unsolvedWord = [];
+
+
+  function init(){
+
+    
+
+  }
+
+  function guess(){
+
+    wordCounter++;
+    console.log(wordCounter);
+
+    if(wordCounter == 2){
+      $('#word2').removeAttr("inert");
+      $('#word1').prop('inert', true);
+    }else if(wordCounter == 3){
+      $('#word3').removeAttr("inert");
+      $('#word2').prop('inert', true);
+    }else if(wordCounter == 4){
+      $('#word4').removeAttr("inert");
+      $('#word3').prop('inert', true);
+    }else if(wordCounter == 5){
+      $('#word5').removeAttr("inert");
+      $('#word4').prop('inert', true);
+    }else if(wordCounter == 6){
+      $('#word6').removeAttr("inert");
+      $('#word5').prop('inert', true);
+    }
+
+    const let1 = $('#let1').val();
+    const let2 = $('#let2').val();
+    const let3 = $('#let3').val();
+    const let4 = $('#let4').val();
+    const let5 = $('#let5').val();
+
+    const word1 = let1 + let2 + let3 + let4 + let5;
+    //console.log(word1);
+
+    word = "catch";
+
+    if(word1 == word){
+      //if User guesses entire word correctly on first try
+      alert('unbelievable!')
+    }else{
+      //check letter-by-letter matches
+      if(let1 == word[0]){
+        $('#let1').css('border', '7px solid green');
+      }else if(let1 == word[1] || let1 == word[2] || let1 == word[3] ||
+              let1 == word[4]
+        ){
+        $('#let1').css('border', '7px solid yellow');
+      }
+
+      //2nd letter
+      if(let2 == word[1]){
+        $('#let2').css('border', '7px solid green');
+      }else if(let2 == word[0] || let2 == word[2] || let2 == word[3] ||
+              let2 == word[4]
+        ){
+        $('#let2').css('border', '7px solid yellow');
+      }
+      
+      if(let3 == word[2]){
+        $('#let3').css('border', '7px solid green');
+      }else if(let3 == word[0] || let3 == word[1] || let3 == word[3] ||
+              let3 == word[4]
+        ){
+        $('#let3').css('border', '7px solid yellow');
+      }
+
+      if(let4 == word[3]){
+        $('#let4').css('border', '7px solid green');
+      }else if(let4 == word[0] || let4 == word[2] || let4 == word[1] ||
+              let4 == word[4]
+        ){
+        $('#let4').css('border', '7px solid yellow');
+      }
+
+      if(let5 == word[4]){
+        $('#let5').css('border', '7px solid green');
+      }else if(let5 == word[0] || let5 == word[2] || let5 == word[3] ||
+              let5 == word[1]
+        ){
+        $('#let5').css('border', '7px solid yellow');
+      }
+    }
+    
+    const let6 = $('#let1').val();
+    const let7 = $('#let1').val();
+    const let8 = $('#let1').val();
+    const let9 = $('#let1').val();
+    const let10 = $('#let1').val();
+    
+    
+  }
+
+
+
+    // Select all input fields with the specific class
+  const inputs = document.querySelectorAll('.autotab-input');
+
+  inputs.forEach((input, index) => {
+    input.addEventListener('input', (event) => {
+      const currentInput = event.target;
+      const maxLength = parseInt(currentInput.getAttribute('maxlength'), 10);
+      const currentLength = currentInput.value.length;
+
+      // Check if the maximum character limit is reached
+      if (currentLength >= maxLength) {
+        // Find the next input in the NodeList
+        const nextInput = inputs[index + 1];
+        
+        // If a next input field exists, shift focus to it
+        if (nextInput) {
+          nextInput.focus();
+        }
+      }
+    });
+  });
+
+  function submitWord(){
+
+  }
+
+  init();
+</script>
+</body>
+</html>

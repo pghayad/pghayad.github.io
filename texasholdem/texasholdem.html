@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        * {
+        box-sizing: border-box;
+        }
+
+        .highlight {
+        background-color: orange;
+        color: white;
+        }
+
+        button:hover {
+        color: white;
+        }
+    </style>
+  <title>Texas Hold 'Em Poker, by Paul Ghayad</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+      <div class="col-sm-6" style="background-color:lavender;">
+        <h1>Texas Hold 'Em by Paul Ghayad</h1>
+        <h2>$1 / $3 Blinds</h2>
+          <h3>My Chips</h3>
+          <h3 id="chipsUser"></h3>
+          <h3>CPU Chips</h3>
+          <h3 id="chipsCPU"></h3>
+          <h3>What do you do?</h3>
+          <span>
+            <button disabled class="btn btn-lg btn-caution" id="btnFold" onclick="play()">Fold</button>
+            <button disabled class="btn btn-lg btn-caution" id="btnCheck" onclick="play()">Check</button>
+            <button disabled class="btn btn-lg btn-success" id="btnCall" onclick="play()">Call</button>
+            <button disabled class="btn btn-lg btn-danger" id="btnRaise" onclick="play()">Raise</button>
+            <button disabled class="btn btn-lg btn-danger" id="btnAllIn" onclick="play()">All In</button>
+          </span>
+          <br><br><br>
+          <p>Here is your hand:</p>
+          <div id="cardsUser">
+            
+          </div>
+        </div>
+      
+      <div class="col-sm-6" style="background-color:lavenderblush;">
+        <h1>The Board</h1>
+        <div>
+            <span id="flop">
+                The Flop
+            </span>
+            <span id="turn">
+                The Turn
+            </span>
+            <span id="river">
+                The River
+            </span>
+        </div>
+        <h2 id="hand"></h2>
+        <button hidden id="resetBtn" onclick="reset()">Deal Next Hand</button>
+        <button hidden id="playAgainBtn" onclick="playAgain()">Play Again</button>
+      </div>
+      </div>
+    </div>
+  
+
+<script>
+    /*
+  Texas Hold 'Em Poker by Paul Ghayad
+
+  Description and Features:
+    - A heads up poker game between the User and a CPU
+    - the CPU will play like a logical person would ("playing by the book")
+    - 
+  To Do:
+    
+
+*/
+let ranks = [2,3,4,5,6,7,8,9,'T','J','Q','K','A'];
+let suits = ['♣','♦','♥','♠'];
+let myHand = [], cpuHand = [];
+let board = [];
+let arrNum = [];
+let deck = [];
+let isDealer = false;
+let val = "";
+let chipsUser = 100, betUser = 0, chipsCPU = 100, betCPU = 0;
+let rand = 0;
+let card = '';
+
+/*
+clubs (♣), diamonds (♦), hearts (♥), and spades (♠). 
+*/
+function createDeck(){
+  for(let i = 0; i < ranks.length; i++){
+    for(let j = 0; j < suits.length; j++){
+      deck.push(ranks[i] + suits[j]);
+    }
+  }
+
+  //init
+  $('#chipsUser').html(chipsUser);
+  $('#chipsCPU').html(chipsCPU);
+}
+
+//deal 2 cards to the User and 2 cards to the CPU, alternating who is dealt first
+//every other hand
+function deal(){
+  //add chips to UI
+  $('#chips').html("Chips User: " + chipsUser + "<br>Chips CPU: " + chipsCPU)
+
+  for(let i = 0; i < 2; i++){
+    //deal User
+    rand = Math.round(Math.random()*(deck.length-1));
+    card = deck.splice(rand,1).join();
+    myHand.push(card);
+    
+    //add to UI
+    $('#cardsUser').append('<b style="font-size: 44px; border: 5px 5px solid green;">' + card + '</b>')
+
+    //deal CPU
+    rand = Math.round(Math.random()*(deck.length-1));
+    card = deck.splice(rand,1).join();
+    cpuHand.push(card);
+  }
+  console.log('my hand ' + myHand  + ", cpu hand: " + cpuHand);
+}
+
+//add 3 cards to the board
+function dealFlop(){
+    for(let i = 0; i < 3; i++){
+        rand = Math.round(Math.random()*(deck.length-1));
+        card = deck.splice(rand,1).join();
+        board.push(card);
+        $('#flop').append('<button id="'+i+'"type="button" class="btn btn-lg card">' + card + '</button>')
+    }
+}
+
+//add a 4th card to the board
+function dealTurn(){
+    for(let i = 0; i < 1; i++){
+        rand = Math.round(Math.random()*(deck.length-1));
+        card = deck.splice(rand,1).join();
+        board.push(card);
+        $('#turn').append('<button id="'+i+'"type="button" class="btn btn-lg card">' + card + '</button>')
+    }
+}
+
+//add a 5th card to the board
+function dealRiver(){
+    for(let i = 0; i < 1; i++){
+        rand = Math.round(Math.random()*(deck.length-1));
+        card = deck.splice(rand,1).join();
+        board.push(card);
+        $('#river').append('<button id="'+i+'"type="button" class="btn btn-lg card">' + card + '</button>')
+    }
+}
+
+  function submit(){
+    bet = parseInt($("#bet option:selected" ).text());
+
+    //data validation for bet amount
+    if(bet > chips){
+      alert("bet amount greater than chips. choose smaller bet amount")
+    }else{
+      chips -= bet;
+      $('#chips').html(chips)
+      $('#bet').attr('disabled', true);
+      $('#swapBtn').attr('disabled', false);
+      //$('.highlight').remove();
+      $('#cards').show();
+      $('#submitBtn').attr('disabled', true)
+    }
+  }
+
+function convertNum(myHandEnd){
+  for(let i = 0; i < myHandEnd.length; i++){
+    if(myHandEnd[i].charAt(0) === 'T'){
+      arrNum.push(10);
+    }else if(myHandEnd[i].charAt(0) === 'J'){
+      arrNum.push(11);
+    }else if(myHandEnd[i].charAt(0) === 'Q'){
+      arrNum.push(12);
+    }else if(myHandEnd[i].charAt(0) === 'K'){
+      arrNum.push(13);
+    }else if(myHandEnd[i].charAt(0) === 'A'){
+      arrNum.push(14);
+    }else{
+      arrNum.push(parseInt(myHandEnd[i].charAt(0)))
+    }
+  }
+
+  arrNum.sort(function(a, b){return a - b});
+  console.log(arrNum)
+  return arrNum;
+}
+
+function evalHand(myHandEnd){
+  let card0 = myHandEnd[0];
+  let card1 = myHandEnd[1];
+  let card2 = myHandEnd[2];
+  let card3 = myHandEnd[3];
+  let card4 = myHandEnd[4];
+  let hasStraight = false;
+
+  //logic for the straight
+  let arrNum = convertNum(myHandEnd);
+  if((arrNum[0] === arrNum[1]-1 && arrNum[1] === arrNum[2]-1 && arrNum[2] === arrNum[3]-1 &&
+    arrNum[3] === arrNum[4]-1) || (arrNum[0] === 2 && arrNum[1] === 3 && arrNum[2] === 4 &&
+    arrNum[3] === 5 && arrNum[4] === 14)){
+      hasStraight = true;
+    }
+
+  //royal flush
+
+  //straight flush that's not royal
+
+  //4 of a kind
+  if((card0.charAt(0) === card1.charAt(0) && card0.charAt(0) === card2.charAt(0) &&
+      card0.charAt(0) === card3.charAt(0) ) ||
+    (card0.charAt(0) === card1.charAt(0) && card0.charAt(0) === card2.charAt(0) &&
+      card0.charAt(0) === card4.charAt(0) ) ||
+    (card1.charAt(0) === card2.charAt(0) && card1.charAt(0) === card3.charAt(0) &&
+      card1.charAt(0) === card4.charAt(0) )
+    ){
+    $('#hand').html("<h2>You Have: 4 of a Kind</h2>")
+    chips += bet*26;
+  }
+  //full house
+  else if((card0.charAt(0) === card1.charAt(0) && card2.charAt(0) === card3.charAt(0) && card2.charAt(0) === card4.charAt(0)) || 
+    (card0.charAt(0) === card2.charAt(0) && card1.charAt(0) === card3.charAt(0) && card1.charAt(0) === card4.charAt(0)) ||
+    (card0.charAt(0) === card3.charAt(0) && card1.charAt(0) === card2.charAt(0) && card1.charAt(0) === card4.charAt(0)) ||
+    (card0.charAt(0) === card4.charAt(0) && card1.charAt(0) === card2.charAt(0) && card1.charAt(0) === card3.charAt(0)) ||
+
+    (card1.charAt(0) === card2.charAt(0) && card0.charAt(0) === card3.charAt(0) && card0.charAt(0) === card4.charAt(0)) ||
+    (card1.charAt(0) === card3.charAt(0) && card0.charAt(0) === card2.charAt(0) && card0.charAt(0) === card4.charAt(0)) ||
+    (card1.charAt(0) === card4.charAt(0) && card0.charAt(0) === card2.charAt(0) && card0.charAt(0) === card3.charAt(0)) ||
+
+    (card2.charAt(0) === card3.charAt(0) && card0.charAt(0) === card1.charAt(0) && card0.charAt(0) === card4.charAt(0)) ||
+    (card2.charAt(0) === card4.charAt(0) && card0.charAt(0) === card1.charAt(0) && card0.charAt(0) === card3.charAt(0)) ||
+
+    (card3.charAt(0) === card4.charAt(0) && card0.charAt(0) === card1.charAt(0) && card0.charAt(0) === card2.charAt(0))
+  ){
+    chips += bet*3;
+    $('#hand').html("<h2>You Have: a Full House</h2>")
+  }
+  //flush
+  else if(card0.charAt(1) === card1.charAt(1) && card0.charAt(1) === card2.charAt(1) && 
+      card0.charAt(1) === card3.charAt(1) && card0.charAt(1) === card4.charAt(1)
+    ){
+    $('#hand').html("<h2>You Have: A Flush</h2>")
+    chips += bet*7;
+  }
+  //straight
+  else if(hasStraight){
+    $('#hand').html("<h2>You Have: A Straight</h2>")
+    chips += bet*5;
+  }
+
+  //3 of a kind
+  else if((card0.charAt(0) === card1.charAt(0) && card0.charAt(0) === card2.charAt(0)) || 
+      (card0.charAt(0) === card1.charAt(0) && card0.charAt(0) === card3.charAt(0)) ||
+    (card0.charAt(0) === card1.charAt(0) && card0.charAt(0) === card4.charAt(0)) ||
+    (card0.charAt(0) === card2.charAt(0) && card0.charAt(0) === card3.charAt(0)) ||
+    (card0.charAt(0) === card2.charAt(0) && card0.charAt(0) === card4.charAt(0)) ||
+    (card1.charAt(0) === card2.charAt(0) && card1.charAt(0) === card3.charAt(0)) ||
+    (card1.charAt(0) === card2.charAt(0) && card1.charAt(0) === card4.charAt(0)) ||
+    (card2.charAt(0) === card3.charAt(0) && card2.charAt(0) === card4.charAt(0))
+  ){
+    chips += bet*4;
+    $('#hand').html("<h2>You Have: 3 of a Kind</h2>")
+  }
+  //2 pair
+  else if((card0.charAt(0) === card1.charAt(0) && card2.charAt(0) === card3.charAt(0)) || 
+    (card0.charAt(0) === card1.charAt(0) && card2.charAt(0) === card4.charAt(0)) ||
+    (card0.charAt(0) === card1.charAt(0) && card3.charAt(0) === card4.charAt(0)) ||
+    (card0.charAt(0) === card2.charAt(0) && card1.charAt(0) === card3.charAt(0)) ||
+    (card0.charAt(0) === card2.charAt(0) && card1.charAt(0) === card4.charAt(0)) ||
+    (card0.charAt(0) === card2.charAt(0) && card3.charAt(0) === card4.charAt(0)) ||
+    (card0.charAt(0) === card3.charAt(0) && card1.charAt(0) === card2.charAt(0)) ||
+    (card0.charAt(0) === card3.charAt(0) && card1.charAt(0) === card4.charAt(0)) ||
+    (card0.charAt(0) === card3.charAt(0) && card2.charAt(0) === card4.charAt(0)) ||
+    (card0.charAt(0) === card4.charAt(0) && card1.charAt(0) === card2.charAt(0)) ||
+    (card0.charAt(0) === card4.charAt(0) && card1.charAt(0) === card3.charAt(0)) ||
+    (card0.charAt(0) === card4.charAt(0) && card2.charAt(0) === card3.charAt(0)) ||
+    (card1.charAt(0) === card2.charAt(0) && card3.charAt(0) === card4.charAt(0)) ||
+    (card1.charAt(0) === card4.charAt(0) && card2.charAt(0) === card3.charAt(0))
+  ){
+    chips += bet*3;
+    $('#hand').html("<h2>You Have: Two Pair</h2>")
+  }
+  //1 pair
+  else if(card0.charAt(0) === card1.charAt(0) || card0.charAt(0) === card2.charAt(0) || 
+      card0.charAt(0) === card3.charAt(0) || card0.charAt(0) === card4.charAt(0) ||
+    card1.charAt(0) === card2.charAt(0) || card1.charAt(0) === card3.charAt(0) ||
+    card1.charAt(0) === card4.charAt(0) || card2.charAt(0) === card3.charAt(0) ||
+    card2.charAt(0) === card4.charAt(0) || card3.charAt(0) === card4.charAt(0)
+  ){
+    chips += bet*2;
+    $('#hand').html("<h2>You Have: One Pair</h2>")
+  }else{
+    $('#hand').html("<h2>You Have: Nothing...</h2>")
+  }
+
+  //when run out of chips, show Start Over button
+  if(chips === 0){
+    $('#playAgainBtn').show();
+    $('#resetBtn').hide();
+  }else{
+    $('#chips').html(chips)
+    $('#resetBtn').show();
+  }
+  
+  
+}
+
+// function clickBtn(btn){
+//   console.log(btn)
+// }
+
+ function reset(){
+    $('#bet').attr('disabled', false);
+    $('#submitBtn').attr('disabled', false);
+    $('#swapBtn').attr('disabled', true);
+    //$('.highlight').remove();
+    $('#cards').hide();
+    $('#cards').empty();
+    $("#hand").html("");
+    $('#resetBtn').hide();
+    arrH = [];
+    myHand = [];
+    myHandBeg = [];
+    myHandEnd = [];
+    deck = [];
+    createDeck();
+    deal();
+ }
+
+ function playAgain(){
+   location.reload();
+ }
+
+$(document).ready(function(){
+
+  
+  $('#cards').hide();
+})
+
+
+
+createDeck();
+deal();
+dealFlop();
+dealTurn();
+dealRiver();
+
+
+
+
+</script>
+</body>
+</html>
