@@ -101,8 +101,7 @@
     </div>
     <div class="col-sm-6">
       <h3>Guessed Letters</h3>
-              <div class="container">
-                <div class="col-sm-3">
+              <div id="letters" class="container">
                   <div class="col">A</div>
                   <div class="col">B</div>
                   <div class="col">C</div>
@@ -116,23 +115,20 @@
                   <div class="col">K</div>
                   <div class="col">L</div>
                   <div class="col">M</div>
+                  <div class="col">N</div>
+                  <div class="col">O</div>
+                  <div class="col">P</div>
+                  <div class="col">Q</div>
+                  <div class="col">R</div>
+                  <div class="col">S</div>
+                  <div class="col">T</div>
+                  <div class="col">U</div>
+                  <div class="col">V</div>
+                  <div class="col">W</div>
+                  <div class="col">X</div>
+                  <div class="col">Y</div>
+                  <div class="col">Z</div>
                 </div>
-                <div class="col-sm-3">
-                  <div class="col-8">N</div>
-                  <div class="col-4">O</div>
-                  <div class="col-8">P</div>
-                  <div class="col-4">Q</div>
-                  <div class="col-8">R</div>
-                  <div class="col-4">S</div>
-                  <div class="col-8">T</div>
-                  <div class="col-4">U</div>
-                  <div class="col-8">V</div>
-                  <div class="col-4">W</div>
-                  <div class="col-8">X</div>
-                  <div class="col-4">Y</div>
-                  <div class="col-4">Z</div>
-                </div>
-              </div>
           </div>
   </div>
 </div>
@@ -142,13 +138,14 @@
 
   /*
     September 6th 2026
+    11:39; broad and washington starbucks
 
     To Do:
       - Prevent yellow duplicates: if there's only one of that letter and it is guessed twice, only 1 yellow should show up.
 
-      -
+      - Get the letters to highlight as yellow, green, or red depending if in the word, correct letter, or not in the word
 
-
+      - 
   */
 
   let words = ["favor", "river", "ponds", "flick"]
@@ -157,6 +154,18 @@
   let guesses = 6;
   let wordCounter = 1;
   let unsolvedWord = [];
+  let colorCode = 0;
+
+  
+  let letters = [
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
+    'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
+    'U', 'V', 'W', 'X', 'Y', 'Z'
+  ]
+
+  let guessedLetters = [
+
+  ]
 
 
   function init(){
@@ -165,8 +174,21 @@
 
   }
 
-  function guess(){
+  function markLetter(letter, colorCode){
+    console.log(letter + ", " + colorCode)
+    $("#letters").children().each(function() {
+        // Get the HTML of the current child and compare
+        if ($(this).html().toLowerCase() === letter && colorCode == 0) {
+          $(this).css('border', '7px solid green');
+        }else if($(this).html().toLowerCase() === letter && colorCode == 1){
+          $(this).css('border', '7px solid yellow');
+        }else if($(this).html().toLowerCase() === letter && colorCode == 2){
+          $(this).css('border', '7px solid red');
+        }
+    });
+  }
 
+  function guess(){
     wordCounter++;
     console.log(wordCounter);
 
@@ -194,7 +216,6 @@
     const let5 = $('#let5').val();
 
     const word1 = let1 + let2 + let3 + let4 + let5;
-    //console.log(word1);
 
     word = "catch";
 
@@ -205,44 +226,76 @@
       //check letter-by-letter matches
       if(let1 == word[0]){
         $('#let1').css('border', '7px solid green');
+        colorCode = 0;
       }else if(let1 == word[1] || let1 == word[2] || let1 == word[3] ||
               let1 == word[4]
         ){
         $('#let1').css('border', '7px solid yellow');
+        colorCode = 1
+      }else{
+        colorCode = 2;
       }
+
+      markLetter(let1, colorCode);
 
       //2nd letter
       if(let2 == word[1]){
         $('#let2').css('border', '7px solid green');
+        colorCode = 0
       }else if(let2 == word[0] || let2 == word[2] || let2 == word[3] ||
               let2 == word[4]
         ){
         $('#let2').css('border', '7px solid yellow');
+        colorCode = 1
+      }else{
+        colorCode = 2
       }
-      
+
+      markLetter(let2, colorCode);
+
       if(let3 == word[2]){
         $('#let3').css('border', '7px solid green');
+        colorCode = 0
       }else if(let3 == word[0] || let3 == word[1] || let3 == word[3] ||
               let3 == word[4]
         ){
         $('#let3').css('border', '7px solid yellow');
+        colorCode = 1
+      }else{
+        colorCode = 2
       }
+
+      markLetter(let3, colorCode);
 
       if(let4 == word[3]){
         $('#let4').css('border', '7px solid green');
+        colorCode = 0
       }else if(let4 == word[0] || let4 == word[2] || let4 == word[1] ||
               let4 == word[4]
         ){
         $('#let4').css('border', '7px solid yellow');
+        colorCode = 1
+      }else{
+        colorCode = 2
       }
 
+      markLetter(let4, colorCode);
+
+      console.log(let5)
       if(let5 == word[4]){
         $('#let5').css('border', '7px solid green');
+        colorCode = 0
       }else if(let5 == word[0] || let5 == word[2] || let5 == word[3] ||
               let5 == word[1]
         ){
         $('#let5').css('border', '7px solid yellow');
+        colorCode = 1
+      }else{
+        colorCode = 2
       }
+
+      console.log(let5 + ", " + colorCode)
+      markLetter(let5, colorCode);
     }
     
     const let6 = $('#let1').val();
