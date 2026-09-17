@@ -138,16 +138,18 @@ function submit(){
   numTotal++;
   counter++;
   $('#correct').html(numCorrect + "/" + numTotal) 
+  $("input[type='radio']").prop("disabled", true);
 }
 
 //when clicking the radio buttons
 function register(value){
   $('#submitBtn').attr('disabled', false);
+
   answer = value.id;
 }
 
 function next(){
-  console.log("x is " + x)
+    $("input[type='radio']").prop("disabled", false);
     $('#question').html(data[counter].question)
     $('#label0').html("<h2>"+data[counter].button0+"</h2>")
     $('#label1').html("<h2>"+data[counter].button1+"</h2>")
