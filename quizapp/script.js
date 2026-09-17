@@ -5,35 +5,35 @@
     -some css signal that answer is correct or incorrect
     -clean up the code. i'm currently doing that
 */
-let firstAns = "button1";
+let firstAns = "button2";
 let data = [
   {
-    question: "What is the capital of Pennsylvania?",
-    button0: "Philadelphia",
-    button1: "Harrisburg",
-    button2: "Lancaster",
+    question: "In what year was JavaScript invented?",
+    button0: "1998",
+    button1: "1996",
+    button2: "1995",
+    correct: "button2"
+  },
+  {
+    question: "What JavaScript data type would someone's name be?",
+    button0: "string",
+    button1: "number",
+    button2: "boolean",
+    correct: "button0"
+  },
+  {
+    question: "What JavaScript data type would someone's height be?",
+    button0: "string",
+    button1: "number",
+    button2: "boolean",
     correct: "button1"
-  },
-  {
-    question: "How many inches are in 5.5 feet?",
-    button0: 55,
-    button1: 50,
-    button2: 66,
-    correct: "button2"
-  },
-  {
-    question: "Who wrote Animal Farm?",
-    button0: "Aldous Huxley",
-    button1: "William Shakespeare",
-    button2: "George Orwell",
-    correct: "button2"
   },  
   {
-    question: "What is the capital of New Jersey?",
-    button0: "Trenton",
-    button1: "Princeton",
-    button2: "Atlantic City",
-    correct: "button0"
+    question: "Which data type allows you to store multiple values in it?",
+    button0: "string",
+    button1: "array",
+    button2: "number",
+    correct: "button1"
   }
 ]
 
@@ -106,9 +106,9 @@ function register(value){
 function next(){
   console.log("x is " + x)
     $('#question').html(data[counter].question)
-    $('#label0').html(data[counter].button0)
-    $('#label1').html(data[counter].button1)
-    $('#label2').html(data[counter].button2)
+    $('#label0').html("<h2>"+data[counter].button0+"</h2>")
+    $('#label1').html("<h2>"+data[counter].button1+"</h2>")
+    $('#label2').html("<h2>"+data[counter].button2+"</h2>")
     $('#nextBtn').attr('disabled', true);
     $('#border' + x).css('border','');
     $('input').prop('checked', false);
