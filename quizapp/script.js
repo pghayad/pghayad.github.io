@@ -1,9 +1,9 @@
 /*
   To Do:
     -take care of when the last question is wrong, i.e. disable/enable buttons
-    -running total of correct answers and total answers
-    -some css signal that answer is correct or incorrect
     -clean up the code. i'm currently doing that
+    -add audio for a correct response and an incorrect response
+    -add an animation
 */
 let firstAns = "button2";
 let data = [
@@ -34,7 +34,50 @@ let data = [
     button1: "array",
     button2: "number",
     correct: "button1"
+  },
+  {
+    question: "Which data type contains key-value pairs?",
+    button0: "object",
+    button1: "array",
+    button2: "number",
+    correct: "button0"
+  },
+  {
+    question: "What symbols are used to declare an array?",
+    button0: "square brackets",
+    button1: "curly braces",
+    button2: "parentheses",
+    correct: "button0"
+  },
+  {
+    question: "What are these symbols called: {} ",
+    button0: "square brackets",
+    button1: "curly braces",
+    button2: "parentheses",
+    correct: "button1"
+  },
+  {
+    question: "How would I add 4 to a variable myNumber and assign it the new sum?",
+    button0: "myNumber++ 4",
+    button1: "myNumber + 4",
+    button2: "myNumber += 4",
+    correct: "button2"
+  },
+  {
+    question: "What is this symbol called in JS: = ",
+    button0: "equality operator",
+    button1: "assignment operator",
+    button2: "addition operator",
+    correct: "button1"
+  },
+  {
+    question: "What does console.log() do?",
+    button0: "prints whatever is inside the parentheses",
+    button1: "returns the data type of a variable",
+    button2: "returns an error",
+    correct: "button0"
   }
+
 ]
 
 let counter = 0;
