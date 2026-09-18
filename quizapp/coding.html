@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Quiz App by Paul Ghayad</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="jumbotron text-center">
+  <h1>JavaScript Knowledge Quiz</h1>
+  <h2>Good Luck!</h2> 
+</div>
+
+<div class="container">
+  <h2>Correct/Total</h2>
+  <h2 id="correct">0/0</h2>
+</div>
+<div class="container">
+  <h1 id="question">In what year was JavaScript invented?</h1>
+  <div id="border0" class="form-check">
+    <input onclick="register(this)" class="form-check-input" type="radio" name="exampleRadios" id="button0" value="option0">
+    <label id="label0" class="form-check-label" for="button0">
+      <h2>1996</h2>
+    </label>
+</div>
+<div id="border1" class="form-check">
+  <input onclick="register(this)" class="form-check-input" type="radio" name="exampleRadios" id="button1" value="option1">
+  <label id="label1" class="form-check-label" for="button1">
+    <h2>1998</h2>
+  </label>
+</div>
+<div id="border2" class="form-check">
+  <input onclick="register(this)" class="form-check-input" type="radio" name="exampleRadios" id="button2" value="option2">
+  <label id="label2" class="form-check-label" for="button2">
+    <h2>1995</h2>
+  </label>
+</div>
+
+<button id="submitBtn" class="btn btn-success" onclick="submit()" disabled>Submit</button>
+<button id="nextBtn" class="btn btn-info" onclick="next()" disabled>Next Question</button>
+<button id="againBtn" class="btn btn-warning" onclick="playAgain()" disabled hidden>Play Again</button>
+</div>
+
+<script>
+  /*
+  To Do:
+    -take care of when the last question is wrong, i.e. disable/enable buttons
+    -clean up the code. i'm currently doing that
+    -add audio for a correct response and an incorrect response
+    -add an animation
+*/
+let firstAns = "button1";
+let data = [
+  {
+    question: "What does the .length string method do?",
+    button0: "returns the number of characters in a string, excl. blank spaces",
+    button1: "returns the number of characters in a string, incl. blank spaces",
+    button2: "returns the number of letters in a string, excl. blank spaces",
+    correct: "button1"
+  },
+  {
+    question: "What is another name for an argument in JavaScript?",
+    button0: "parameter",
+    button1: "query",
+    button2: "boolean",
+    correct: "button0"
+  },
+  {
+    question: "Does the .repeat() string method take any arguments?",
+    button0: "No",
+    button1: "Yes, two of them",
+    button2: "Yes, one of them",
+    correct: "button2"
+  },  
+  {
+    question: "How many arguments do we typically use for .substring()?",
+    button0: "0",
+    button1: "1",
+    button2: "2",
+    correct: "button2"
+  },
+  {
+    question: "Which data type do we use as a parameter for .charAt()?",
+    button0: "object",
+    button1: "array",
+    button2: "number",
+    correct: "button2"
+  },
+  {
+    question: "Which of the following is data that would be represented well as a boolean data type?",
+    button0: "whether someone is late",
+    button1: "someone's hair color",
+    button2: "someone's height",
+    correct: "button0"
+  },
+  {
+    question: "What are these symbols called: () ",
+    button0: "square brackets",
+    button1: "curly braces",
+    button2: "parentheses",
+    correct: "button2"
+  },
+  {
+    question: "How would I multiply a variable myNumber by 7 and assign it the new product?",
+    button0: "myNumber ** 7",
+    button1: "myNumber *= 7",
+    button2: "myNumber /= 7",
+    correct: "button1"
+  },
+  {
+    question: "What is this symbol called: ;",
+    button0: "colon",
+    button1: "comma",
+    button2: "semi-colon",
+    correct: "button2"
+  },
+  {
+    question: "What does the typeof operator do?",
+    button0: "prints whatever is inside the parentheses",
+    button1: "returns the data type of a variable",
+    button2: "returns an error",
+    correct: "button1"
+  }
+
+]
+
+let counter = 0;
+let answer = "";
+let storage = [];
+let numCorrect = 0;
+let numTotal = 0;
+let x = ''
+
+// 1. Select the button element
+const button = document.getElementById('submitBtn');
+
+// 2. Define the path to your audio file
+const audioWrong = new Audio('https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3');
+
+// 3. Add the click event listener
+button.addEventListener('click', () => {
+  audioWrong.play();
+});
+
+
+//answer is the id of the element
+function submit(){
+
+  console.log(answer)
+
+  if(answer === ""){
+    alert('make a selection')
+  }
+
+  //first question of quiz
+  else if(counter === 0){
+    if(firstAns === answer){
+      console.log("correct!");
+      right();
+    }else{  //wrong answer on first question
+      console.log("sorry, wrong answer...")
+      wrong();
+    }
+
+    //end of quiz
+    }else if(answer === data[counter].correct && counter === data.length-1){
+      alert("quiz over")
+      numCorrect++;
+      $('#nextBtn').attr('disabled', true);
+      $('#submitBtn').attr('disabled', true);
+      $('#againBtn').attr('disabled', false);
+      x = answer[answer.length-1]
+      $('#border' + x).css('border', '5px solid green');
+    }else if(answer !== data[counter].correct && counter === data.length-1){
+      alert("quiz over")
+      $('#nextBtn').attr('disabled', true);
+      $('#submitBtn').attr('disabled', true);
+      $('#againBtn').attr('disabled', false);
+      x = answer[answer.length-1]
+      $('#border' + x).css('border', '5px solid red');
+    }
+    
+    else{  //all other questions besides the first and the last questions
+    if(answer === data[counter].correct){
+        console.log("correct!")
+        right();
+      }else{
+        console.log("sorry, incorrect...")
+        wrong();
+      }
+  }
+
+  //executes no matter what
+  numTotal++;
+  counter++;
+  $('#correct').html(numCorrect + "/" + numTotal) 
+  $("input[type='radio']").prop("disabled", true);
+}
+
+//when clicking the radio buttons
+function register(value){
+  $('#submitBtn').attr('disabled', false);
+
+  answer = value.id;
+}
+
+function next(){
+    $("input[type='radio']").prop("disabled", false);
+    $('#question').html(data[counter].question)
+    $('#label0').html("<h2>"+data[counter].button0+"</h2>")
+    $('#label1').html("<h2>"+data[counter].button1+"</h2>")
+    $('#label2').html("<h2>"+data[counter].button2+"</h2>")
+    $('#nextBtn').attr('disabled', true);
+    $('#border' + x).css('border','');
+    $('input').prop('checked', false);
+
+    if(counter == data.length-1){
+      $('#againBtn').show()
+    }
+}
+
+function right(){
+  $('#nextBtn').attr('disabled', false);
+  $('#submitBtn').attr('disabled', true);
+  x = answer[answer.length-1]
+  $('#border' + x).css('border', '5px solid green');
+  numCorrect++;
+}
+
+function wrong(){
+  $('#nextBtn').attr('disabled', false);
+  $('#submitBtn').attr('disabled', true);
+  x = answer[answer.length-1]
+  $('#border' + x).css('border', '5px solid red');
+}
+
+function playAgain(){
+  location.reload()
+}
+</script>
+</body>
+</html>
