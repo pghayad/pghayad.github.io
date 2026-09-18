@@ -20,6 +20,10 @@
 <div class="container">
   <h2>Correct/Total</h2>
   <h2 id="correct">0/0</h2>
+  <h1>
+    <b>Question</b> <b id="questionNumber">1</b>
+    of <b id="questions"></b>
+  </h1>
 </div>
 <div class="container">
   <h1 id="question">What does the .length string method do?</h1>
@@ -43,17 +47,18 @@
 </div>
 
 <button id="submitBtn" class="btn btn-success" onclick="submit()" disabled>Submit</button>
+<button style="display: none;" id="backBtn" class="btn btn-success" onclick="back()" disabled>Back</button>
 <button id="nextBtn" class="btn btn-info" onclick="next()" disabled>Next Question</button>
-<button id="againBtn" class="btn btn-warning" onclick="playAgain()" disabled hidden>Play Again</button>
+<button style="display: none;" id="againBtn" class="btn btn-warning" onclick="playAgain()" disabled>Play Again</button>
 </div>
 
 <script>
   /*
   To Do:
-    -take care of when the last question is wrong, i.e. disable/enable buttons
-    -clean up the code. i'm currently doing that
-    -add audio for a correct response and an incorrect response
-    -add an animation
+    -allow for movement between questions without having to answer them
+      -add a back button
+    -optional: add audio for a correct response and an incorrect response
+    -optional: add animations
 */
 let firstAns = "button1";
 let data = [
@@ -126,10 +131,46 @@ let data = [
     button1: "returns the data type of a variable",
     button2: "returns an error",
     correct: "button1"
+  },
+  {
+    question: "What does the ++ operator do?",
+    button0: "adds 2 to a number",
+    button1: "adds 1 to a number",
+    button2: "adds 1 to a string",
+    correct: "button1"
+  },
+  {
+    question: "Which JavaScript keyword is no longer used?",
+    button0: "var",
+    button1: "let",
+    button2: "const",
+    correct: "button0"
+  },
+  {
+    question: "What does the .charAt() string method do?",
+    button0: "prints a number",
+    button1: "returns a boolean",
+    button2: "returns a character in a string at a given index",
+    correct: "button2"
+  },
+  {
+    question: "Which of the following is NOT a JavaScript keyword?",
+    button0: "typeof",
+    button1: "var",
+    button2: "lets",
+    correct: "button2"
+  },
+  {
+    question: "What are you doing this weekend?",
+    button0: "playing around 80% of the time",
+    button1: "studying for my classes",
+    button2: "not behaving well",
+    correct: "button1"
   }
 
 ]
 
+let numQuestions = data.length
 let counter = 0;
 let answer = "";
 let storage = [];
@@ -137,16 +178,21 @@ let numCorrect = 0;
 let numTotal = 0;
 let x = ''
 
-// 1. Select the button element
-const button = document.getElementById('submitBtn');
 
-// 2. Define the path to your audio file
-const audioWrong = new Audio('https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3');
-
-// 3. Add the click event listener
-button.addEventListener('click', () => {
-  audioWrong.play();
+window.addEventListener('load', (event) => {
+  $('#questions').html(numQuestions)
 });
+//FOR AUDIO
+// // 1. Select the button element
+// const button = document.getElementById('submitBtn');
+
+// // 2. Define the path to your audio file
+// const audioWrong = new Audio('https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3');
+
+// // 3. Add the click event listener
+// button.addEventListener('click', () => {
+//   audioWrong.play();
+// });
 
 
 //answer is the id of the element
@@ -198,7 +244,6 @@ function submit(){
 
   //executes no matter what
   numTotal++;
-  counter++;
   $('#correct').html(numCorrect + "/" + numTotal) 
   $("input[type='radio']").prop("disabled", true);
 }
@@ -211,7 +256,27 @@ function register(value){
 }
 
 function next(){
+    counter++;
+    $('#questionNumber').html('<b>' + (counter+1) + "</b>")
     $("input[type='radio']").prop("disabled", false);
+    $('#question').html(data[counter].question)
+    $('#label0').html("<h2>"+data[counter].button0+"</h2>")
+    $('#label1').html("<h2>"+data[counter].button1+"</h2>")
+    $('#label2').html("<h2>"+data[counter].button2+"</h2>")
+    $('#nextBtn').attr('disabled', true);
+    $('#border' + x).css('border','');
+    $('input').prop('checked', false);
+
+    if(counter == data.length-1){
+      $('#againBtn').show()
+    }
+}
+
+function back(){
+  counter--;
+  console.log(counter)
+  $('#questionNumber').html('<b>' + (counter-1) + "</b>")
+  $("input[type='radio']").prop("disabled", false);
     $('#question').html(data[counter].question)
     $('#label0').html("<h2>"+data[counter].button0+"</h2>")
     $('#label1').html("<h2>"+data[counter].button1+"</h2>")
