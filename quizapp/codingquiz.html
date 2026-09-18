@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Quiz App by Paul Ghayad</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="jumbotron text-center">
+  <h1>JavaScript Knowledge Quiz</h1>
+  <h2>Good Luck!</h2> 
+</div>
+
+<div class="container">
+  <h2>Correct/Total</h2>
+  <h2 id="correct">0/0</h2>
+  <h1>
+    <b>Question</b> <b id="questionNumber">1</b>
+    of <b id="questions"></b>
+  </h1>
+</div>
+<div class="container">
+  <h1 id="question">What does the .length string method do?</h1>
+  <div id="border0" class="form-check">
+    <input onclick="register(this)" class="form-check-input" type="radio" name="exampleRadios" id="button0" value="option0">
+    <label id="label0" class="form-check-label" for="button0">
+      <h2>returns the number of characters in a string, excl. blank spaces</h2>
+    </label>
+</div>
+<div id="border1" class="form-check">
+  <input onclick="register(this)" class="form-check-input" type="radio" name="exampleRadios" id="button1" value="option1">
+  <label id="label1" class="form-check-label" for="button1">
+    <h2>returns the number of characters in a string, incl. blank spaces</h2>
+  </label>
+</div>
+<div id="border2" class="form-check">
+  <input onclick="register(this)" class="form-check-input" type="radio" name="exampleRadios" id="button2" value="option2">
+  <label id="label2" class="form-check-label" for="button2">
+    <h2>returns the number of letters in a string, excl. blank spaces</h2>
+  </label>
+</div>
+
+<button id="submitBtn" class="btn btn-success" onclick="submit()" disabled>Submit</button>
+<button disabled id="backBtn" class="btn btn-success" onclick="back()">Back</button>
+<button id="nextBtn" class="btn btn-info" onclick="next()" >Next Question</button>
+<button style="display: none;" id="againBtn" class="btn btn-warning" onclick="playAgain()" disabled>Play Again</button>
+</div>
+
+<script>
+  /*
+  To Do:
+    -allow for movement between questions without having to answer them
+      -add a back button
+    -optional: add audio for a correct response and an incorrect response
+    -optional: add animations
+*/
+let firstAns = "button1";
+let data = [
+  {
+    question: "What does the .length string method do?",
+    button0: "returns the number of characters in a string, excl. blank spaces",
+    button1: "returns the number of characters in a string, incl. blank spaces",
+    button2: "returns the number of letters in a string, excl. blank spaces",
+    correct: "button1"
+  },
+  {
+    question: "What is another name for an argument in JavaScript?",
+    button0: "parameter",
+    button1: "query",
+    button2: "boolean",
+    correct: "button0"
+  },
+  {
+    question: "Does the .repeat() string method take any arguments?",
+    button0: "No",
+    button1: "Yes, two of them",
+    button2: "Yes, one of them",
+    correct: "button2"
+  },  
+  {
+    question: "How many arguments do we typically use for .substring()?",
+    button0: "0",
+    button1: "1",
+    button2: "2",
+    correct: "button2"
+  },
+  {
+    question: "Which data type do we use as a parameter for .charAt()?",
+    button0: "object",
+    button1: "array",
+    button2: "number",
+    correct: "button2"
+  },
+  {
+    question: "Which of the following is data that would be represented well as a boolean data type?",
+    button0: "whether someone is late",
+    button1: "someone's hair color",
+    button2: "someone's height",
+    correct: "button0"
+  },
+  {
+    question: "What are these symbols called: () ",
+    button0: "square brackets",
+    button1: "curly braces",
+    button2: "parentheses",
+    correct: "button2"
+  },
+  {
+    question: "How would I multiply a variable myNumber by 7 and assign it the new product?",
+    button0: "myNumber ** 7",
+    button1: "myNumber *= 7",
+    button2: "myNumber /= 7",
+    correct: "button1"
+  },
+  {
+    question: "What is this symbol called: ;",
+    button0: "colon",
+    button1: "comma",
+    button2: "semi-colon",
+    correct: "button2"
+  },
+  {
+    question: "What does the typeof operator do?",
+    button0: "prints whatever is inside the parentheses",
+    button1: "returns the data type of a variable",
+    button2: "returns an error",
+    correct: "button1"
+  },
+  {
+    question: "What does the ++ operator do?",
+    button0: "adds 2 to a number",
+    button1: "adds 1 to a number",
+    button2: "adds 1 to a string",
+    correct: "button1"
+  },
+  {
+    question: "Which JavaScript keyword is no longer used?",
+    button0: "var",
+    button1: "let",
+    button2: "const",
+    correct: "button0"
+  },
+  {
+    question: "What does the .charAt() string method do?",
+    button0: "prints a number",
+    button1: "returns a boolean",
+    button2: "returns a character in a string at a given index",
+    correct: "button2"
+  },
+  {
+    question: "Which of the following is NOT a JavaScript keyword?",
+    button0: "typeof",
+    button1: "var",
+    button2: "lets",
+    correct: "button2"
+  },
+  {
+    question: "What are you doing this weekend?",
+    button0: "playing around 80% of the time",
+    button1: "studying for my classes",
+    button2: "not behaving well",
+    correct: "button1"
+  }
+
+]
+
+let numQuestions = data.length
+let counter = 0;
+let answer = "";
+let storage = [];
+let numCorrect = 0;
+let numTotal = 0;
+let x = ''
+
+
+window.addEventListener('load', (event) => {
+  $('#questions').html(numQuestions)
+});
+//FOR AUDIO
+// // 1. Select the button element
+// const button = document.getElementById('submitBtn');
+
+// // 2. Define the path to your audio file
+// const audioWrong = new Audio('https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3');
+
+// // 3. Add the click event listener
+// button.addEventListener('click', () => {
+//   audioWrong.play();
+// });
+
+
+//answer is the id of the element
+function submit(){
+
+  console.log(answer)
+
+  if(answer === ""){
+    alert('make a selection')
+  }
+
+  //first question of quiz
+  else if(counter === 0){
+    if(firstAns === answer){
+      console.log("correct!");
+      right();
+    }else{  //wrong answer on first question
+      console.log("sorry, wrong answer...")
+      wrong();
+    }
+
+    //end of quiz
+    }else if(answer === data[counter].correct && counter === data.length-1){
+      alert("quiz over")
+      numCorrect++;
+      $('#nextBtn').attr('disabled', true);
+      $('#submitBtn').attr('disabled', true);
+      $('#againBtn').attr('disabled', false);
+      x = answer[answer.length-1]
+      $('#border' + x).css('border', '5px solid green');
+    }else if(answer !== data[counter].correct && counter === data.length-1){
+      alert("quiz over")
+      $('#nextBtn').attr('disabled', true);
+      $('#submitBtn').attr('disabled', true);
+      $('#againBtn').attr('disabled', false);
+      x = answer[answer.length-1]
+      $('#border' + x).css('border', '5px solid red');
+    }
+    
+    else{  //all other questions besides the first and the last questions
+    if(answer === data[counter].correct){
+        console.log("correct!")
+        right();
+      }else{
+        console.log("sorry, incorrect...")
+        wrong();
+      }
+  }
+
+  //executes no matter what
+  numTotal++;
+  $('#correct').html(numCorrect + "/" + numTotal) 
+  $("input[type='radio']").prop("disabled", true);
+}
+
+//when clicking the radio buttons
+function register(value){
+  $('#submitBtn').attr('disabled', false);
+
+  answer = value.id;
+}
+
+function next(){
+    counter++;
+    $('#questionNumber').html('<b>' + (counter+1) + "</b>")
+    $("input[type='radio']").prop("disabled", false);
+    $('#question').html(data[counter].question)
+    $('#label0').html("<h2>"+data[counter].button0+"</h2>")
+    $('#label1').html("<h2>"+data[counter].button1+"</h2>")
+    $('#label2').html("<h2>"+data[counter].button2+"</h2>")
+    $('#border' + x).css('border','');
+    $('input').prop('checked', false);
+    $('#backBtn').attr('disabled', false);
+
+    if(counter == data.length-1){
+      $('#againBtn').show()
+      $('#nextBtn').attr('disabled', true);
+    }else{
+      $('#nextBtn').attr('disabled', false);
+    }
+
+    if(counter == 0){
+      $('#backBtn').attr('disabled', true);
+    }
+
+    
+}
+
+function back(){
+  
+  counter--
+  $('#questionNumber').html('<b>' + (counter+1) + "</b>")
+  $("input[type='radio']").prop("disabled", false);
+    $('#question').html(data[counter].question)
+    $('#label0').html("<h2>"+data[counter].button0+"</h2>")
+    $('#label1').html("<h2>"+data[counter].button1+"</h2>")
+    $('#label2').html("<h2>"+data[counter].button2+"</h2>")
+    $('#border' + x).css('border','');
+    $('input').prop('checked', false);
+
+    if(counter == data.length-1){
+      $('#againBtn').show()
+    }else{
+      $('#nextBtn').attr('disabled', false);
+    }
+
+    if(counter == 0){
+      $('#backBtn').attr('disabled', true);
+    }
+}
+
+function right(){
+  $('#nextBtn').attr('disabled', false);
+  $('#submitBtn').attr('disabled', true);
+  x = answer[answer.length-1]
+  $('#border' + x).css('border', '5px solid green');
+  numCorrect++;
+}
+
+function wrong(){
+  $('#nextBtn').attr('disabled', false);
+  $('#submitBtn').attr('disabled', true);
+  x = answer[answer.length-1]
+  $('#border' + x).css('border', '5px solid red');
+}
+
+function playAgain(){
+  location.reload()
+}
+</script>
+</body>
+</html>
