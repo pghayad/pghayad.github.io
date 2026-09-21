@@ -14,11 +14,16 @@
         h1, h2, h3 {
             color: #011F5B;
         }
+
+        #banner {
+            width: 100%;
+            height: 275px;
+        }
     </style>
     
 </head>
 <body>
-
+<img id="banner" src="https://cdnsm5-ss12.sharpschool.com/UserFiles/Servers/Server_11994520/Image/renditionDownload.jpeg"/>
 <h1>Coding - Week 1 Review</h1>
 <h2>Test yourself</h2>
  <h2>
@@ -40,19 +45,27 @@
 <script>
     let words = ['What are the 5 JavaScript data types we learned?', 
                 'What is the notion of camelcase when naming a variable?',
+                'How do you do a single line comment in JS? A multiline comment?',
                 'What are all of the different operators we learned?',
                 'How are we naming our formatives for this class?',
                 'What are the keyboard shortcuts we have learned?',
                 'How to start the debugging process when you experience a bug?',
                 'What are the string methods we have learned thus far?',
                 'What is the signature symbol of the array? Of the object?',
-                'What are the two types of conditional statements?'
-
+                'What are the two types of conditional statements?',
+                'Can you declare the same variable name twice?',
+                'What is the JS keyword for declaring a constant?',
+                'Can an array hold multiple data types?',
+                'True or false: the semicolon is optional at the end of a line',
+                'How would you print "hello world!"?',
+                'What are the powers of 2 from 2^0 to 2^7?',
+                'What does http stand for? HTML? CSS?'
     ];
 
     let definitions = [
         'string, number, boolean, array, object',
         'when naming JS variables, start with lowercase letter and new words need to be capitalized: e.g. let myFavoriteFood = "pizza"',
+        'for single-line: //       for multiline: /* */',
         '=, ++, --, +=, -=, *=, /=, **',
         'formative_x_lastname.txt',
         'Ctrl+A: select all, Ctrl+C: copy, Ctrl+N: new file, Ctrl+V: paste, Ctrl+S: save, Ctrl+Z: undo, Ctrl+Y: redo',
@@ -60,7 +73,14 @@
         '.length, .charAt(index), .toUpperCase(), .toLowerCase(), .substring(begIndex, endIndex), .repeat(numTimes)',
         'square brackets: let arr = [0, 1, 2]; curly braces: let obj = {name: "Fred", age: 19, isMale: true}',
         'if/else if/else | the switch statement',
-        
+        'No. You cannot declare something like: let myName and then do let myName again later in the code. It has to be let myName and then just myName',
+        'const',
+        'Yes. You can have something like: let arr = ["happy", true, 21]',
+        'True',
+        'console.log("hello world!")',
+        '2^0 = 1, 2^1 = 2, 2^2 = 4, 2^3 = 8, 2^4 = 16, 2^5 = 32, 2^6 = 64, 2^7 = 128',
+        'hypertext transfer protocol; hypertext markup language; cascading style sheets'
+
 
     ]
 
