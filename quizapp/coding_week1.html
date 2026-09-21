@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Coding - Week 1 Review</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  </head>
+    <style>
+        body {
+            background-color: lightyellow;
+        }
+
+        h1, h2, h3 {
+            color: #011F5B;
+        }
+    </style>
+    
+</head>
+<body>
+
+<h1>Coding - Week 1 Review</h1>
+<h2>Test yourself</h2>
+ <h2>
+    <b>Question</b> <b id="questionNumber">1</b>
+    of <b id="questions"></b>
+  </h2>
+<img width="250px" height="250px" src="https://hips.hearstapps.com/hmg-prod/images/cutest-dog-breed-bernese-64356a43dbcc5.jpg?crop=1.00xw:0.881xh;0,0.0815xh" />
+<h1 id="word"></h1>
+<h2 hidden id="definition"></h2>
+<button class="btn btn-lg btn-success" id="btnVocab" onclick="doVocab()">JavaScript Concepts</button>
+<button hidden id="btnGrammar" onclick="doGrammar()">HTML Concepts</button>
+<button class="btn btn-lg btn-info" hidden id="btnMainMenu" onclick="returnToMain()">Return To Main Menu</button>
+<button hidden id="btnTrans" onclick="showTrans()">Transition Words</button>
+<button class="btn btn-lg btn-primary" hidden id="btnDef" onclick="showDef()">Show Answer</button>
+<button class="btn btn-lg btn-danger" hidden disabled id="btnBack" onclick="back()">Back</button>
+<button class="btn btn-lg btn-warning" hidden id="btnNext" onclick="next()">Next</button>
+
+
+<script>
+    let words = ['What are the 5 JavaScript data types we learned?', 
+                'What is the notion of camelcase when naming a variable?',
+                'What are all of the different operators we learned?',
+                'How are we naming our formatives for this class?',
+                'What are the keyboard shortcuts we have learned?',
+                'How to start the debugging process when you experience a bug?',
+                'What are the string methods we have learned thus far?',
+                'What is the signature symbol of the array? Of the object?',
+                'What are the two types of conditional statements?'
+
+    ];
+
+    let definitions = [
+        'string, number, boolean, array, object',
+        'when naming JS variables, start with lowercase letter and new words need to be capitalized: e.g. let myFavoriteFood = "pizza"',
+        '=, ++, --, +=, -=, *=, /=, **',
+        'formative_x_lastname.txt',
+        'Ctrl+A: select all, Ctrl+C: copy, Ctrl+N: new file, Ctrl+V: paste, Ctrl+S: save, Ctrl+Z: undo, Ctrl+Y: redo',
+        'Look for the line number and an error message in the output',
+        '.length, .charAt(index), .toUpperCase(), .toLowerCase(), .substring(begIndex, endIndex), .repeat(numTimes)',
+        'square brackets: let arr = [0, 1, 2]; curly braces: let obj = {name: "Fred", age: 19, isMale: true}',
+        'if/else if/else | the switch statement',
+        
+
+    ]
+
+    let numQuestions = words.length
+    let counter = 0;
+    let showMainMenu = false;
+
+    //on startup
+    window.addEventListener('load', (event) => {
+      $('#questions').html(numQuestions)
+    });
+
+    function doGrammar(){
+        document.querySelector('#word').innerHTML='A semicolon (;) separates two complete sentences.<br><br>'+
+        'Example: Jess was sick yesterday; nevertheless, she still did well on her science exam.<br><br>'+
+        'A comma (,) can also separate two complete sentences with the words: and, but, yet, so.<br><br>'+
+        'Example: John was an athlete, so he liked running around.'
+        document.querySelector('#btnMainMenu').hidden=false;
+        document.querySelector('#btnGrammar').hidden=true;
+        document.querySelector('#btnVocab').hidden=true;
+        document.querySelector('#btnTrans').hidden=true;
+    }
+
+    function returnToMain(){
+        document.querySelector('#btnMainMenu').hidden=true;
+        //document.querySelector('#btnGrammar').hidden=false;
+        document.querySelector('#btnDef').hidden=true;
+        document.querySelector('#definition').hidden=true;
+        //document.querySelector('#btnTrans').hidden=false;
+        document.querySelector('#btnVocab').hidden=false;
+        document.querySelector('#btnBack').hidden=true;
+        document.querySelector('#btnNext').hidden=true;
+        document.querySelector('#word').innerHTML=''
+        document.querySelector('#btnTrans').innerHTML='Transition Words';
+        document.querySelector('#btnDef').innerHTML='Show Answer'
+    }
+    function showTrans(){
+        document.querySelector('#btnGrammar').hidden=true;
+        console.log(showMainMenu)
+        if(!showMainMenu){
+            document.querySelector('#btnTrans').innerHTML='Return to Main Menu';
+            document.querySelector('#word').innerHTML='Contrast Words: although, even though, nevertheless, despite, however,' + 
+        'on the other hand<br><br>Example: Although she was a fast sprinter, Laura was slow at long-distance running.'
+        +'<br><br>John did great at the Math section of the SAT; however, his Reading performance was atrocious.'
+        
+        +'<br><br>Conclusion Words: thus, therefore, ergo, hence<br><br>It was raining; thus, Jill took her umbrella to work.'
+            showMainMenu=true;
+            document.querySelector('#btnVocab').hidden=true;
+            document.querySelector('#btnGrammar').hidden=true;
+        }else{
+            document.querySelector('#btnVocab').hidden=false;
+            document.querySelector('#btnGrammar').hidden=false;
+            showMainMenu=false;
+            document.querySelector('#word').innerHTML=''
+            document.querySelector('#btnTrans').innerHTML='Transition Words';
+        }
+        
+    }
+
+    function showDef(){
+        if(document.querySelector('#definition').hidden == true){
+            document.querySelector('#definition').hidden=false;
+            document.querySelector('#btnDef').innerHTML='Hide Answer'
+        }else{
+            document.querySelector('#definition').hidden=true;
+            document.querySelector('#btnDef').innerHTML='Show Answer'
+        }
+            
+    }
+
+    function doVocab(){
+        document.querySelector('#btnGrammar').hidden=true;
+        document.querySelector('#btnMainMenu').hidden=false;
+        document.querySelector('#btnTrans').hidden=true;
+        document.querySelector('#btnVocab').hidden=true;
+        document.querySelector('#btnBack').hidden=false;
+        document.querySelector('#btnNext').hidden=false;
+        document.querySelector('#btnDef').hidden=false;
+        document.querySelector('#word').innerHTML=words[counter];
+        document.querySelector('#definition').innerHTML=definitions[counter];
+    }
+
+    function back(){
+        console.log('back: ' + counter)
+        if(counter > 0)
+            counter--;
+
+        $('#questionNumber').html('<b>' + (counter+1) + "</b>")
+        document.querySelector('#word').innerHTML=words[counter];
+        document.querySelector('#definition').innerHTML=definitions[counter];
+        document.querySelector('#btnNext').disabled=false;
+
+        if(counter == 0){
+            document.querySelector('#btnBack').disabled=true;
+        }else{
+            //counter--;
+        }
+    }
+
+    function next(){
+        console.log('next: ' + counter)
+        counter++;
+        $('#questionNumber').html('<b>' + (counter+1) + "</b>")
+        document.querySelector('#word').innerHTML=words[counter];
+        document.querySelector('#definition').innerHTML=definitions[counter];
+        document.querySelector('#btnBack').disabled=false;
+        
+        if(counter == 0){
+            document.querySelector('#btnBack').disabled=true;
+        }else if(counter == words.length-1){
+            document.querySelector('#btnNext').disabled=true;
+            //counter++;
+        }else{
+            document.querySelector('#btnNext').disabled=false;
+        }
+        
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
