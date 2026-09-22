@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>The Memory Game by Paul Ghayad</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <style>
+    button {
+      width: 125px;
+      height: 125px;
+    }
+
+    .container{
+      text-align: center;
+    }
+
+    img {
+      width: 50px;
+      height: 50px;    
+    }
+  </style>
+</head>
+<body>
+
+<div class="jumbotron text-center">
+  <h1>The Memory Game</h1>
+  <p>Practice your matching skills</p> 
+</div>
+  
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-lg-12">
+      <h3>Try to find all of the matching pairs!</h3>
+      <img src="https://vignette.wikia.nocookie.net/nintendo/images/d/d8/New_Super_Mario_Bros._U_Deluxe_-_Mario_01.png/revision/latest/top-crop/width/360/height/450?cb=20181226204245&path-prefix=en">
+      <div id="board" class="container text-center"></div>
+      
+    </div>
+  </div>
+</div>
+
+<script>
+  let board = $('#board')
+
+  let newMatches = ['a. either true or false', 'b. data surrounded by single or double quotes', 'c. conditional with ? and : in it', 'd. []', 'e. key-value pairs', 'f. statement inside all switch cases but 1', 'g. last switch case', 'h. add 2 to x','a. boolean', 'b. string', 'c. ternary operator', 'd. square brackets', 'e. object', 'f. break', 'g. default', 'h. x += 2']
+
+  let idx = Math.round(Math.random()*(newMatches.length-1))
+
+  let counter = 0;
+
+  let arr = [], arrId = [];
+
+  let index = 0;
+
+  //create the board
+  function init(){
+    console.log(newMatches.length)
+    for(let i = 1; i <= 16; i++){
+      if(i === 1 || i === 5 || i === 9 || i === 13){
+        board.append("<br>")
+      }
+      idx = Math.round(Math.random()*(newMatches.length-1))
+      $('#board').append(`<button id="${i}" onclick='reveal(this)'>-<b hidden>"${newMatches[idx]}"</b></button>`)
+
+      newMatches.splice(idx, 1)
+    }
+    
+  }
+
+  //x is the HTML element
+  function reveal(x){
+    //console.log(x)
+    let source1 = $(x).text()
+
+    console.log('source1: ' + source1)
+
+
+    let id = $(x).attr('id')
+    
+    arr.push(source1)
+    arrId.push(id)
+
+    $(x).children().slideToggle()
+    $(x).children().addClass('showing')
+
+    //if theres a match...
+    console.log(arr[0] + ", " + arr[1])
+    if(arr.length === 2 && arr[0][2] === arr[1][2]){
+      alert('thats a match!')
+      counter++;
+      //figure out how to disable both buttons
+      $(x).attr('disabled', true);  //2nd button
+      $('#'+arrId[0]).attr('disabled', true);
+      arr = []
+      arrId = [];
+    }else if(arr.length === 2 && arr[0] !== arr[1]){
+      console.log("No Match")
+      $(x).children().slideToggle(3000);
+      $('#'+arrId[0]).children().slideToggle(2500);
+      arr = []
+      arrId = [];
+    }
+      //
+      $(x).children().attr('src', source1); 
+
+      if(counter === 8){
+        alert("you won the game! refresh page to play again.")
+      }
+    }
+
+     
+
+  function clearBoard(){
+
+  }
+
+  $(init)
+</script>
+</body>
+</html>
